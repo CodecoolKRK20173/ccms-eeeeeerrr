@@ -32,3 +32,6 @@ target/**
 */.classpath
 */.project
 .lst
+.classpath
+.project
+.settings/**
