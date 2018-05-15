@@ -23,7 +23,7 @@ hs_err_pid*
 
 
 .idea/**
-ccms-eeeeeerrr.iml
+*.iml
 *.DB_Store
 .DS_Store
 
