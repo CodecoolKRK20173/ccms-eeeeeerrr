@@ -1,4 +1,17 @@
 package com.codecool.details;
 
 public enum EnumPrivileges {
+    ADD_MENTOR,
+    REMOVE_MENTOR,
+    EDIT_MENTOR,
+    GET_ALL_MENTORS,
+    GET_ALL_STUDENTS,
+    ADD_ASSIGMENT,
+    GARDE_ASSIGMENT,
+    CHECK_ASSIGMENT,
+    ADD_STUDENT,
+    REMOVE_STUDENT,
+    EDIT_STUDENT,
+    SUBMIT_ASSIGMENT,
+    VIEW_GRADES
 }
