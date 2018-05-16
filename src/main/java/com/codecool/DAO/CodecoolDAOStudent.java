@@ -54,4 +54,12 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     }
 
 
+    public List<Assignment> getAllGrades(Student student) {
+        return student.getAssignmentList();
+    }
+
+    public List<Student> getAllStudent() {
+        return this.studentList;
+    }
+
     
