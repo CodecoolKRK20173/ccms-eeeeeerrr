@@ -30,8 +30,11 @@ public enum EnumAccess {
     REGULAR_EMPLOYEE {
         @Override
         public List<EnumPrivileges> getPrivileges() {
+            List<EnumPrivileges> privileges = new ArrayList<>();
 
-            return null;
+            privileges.add(EnumPrivileges.GET_ALL_STUDENTS);
+
+            return privileges;
         }
     },
     MENTOR {
