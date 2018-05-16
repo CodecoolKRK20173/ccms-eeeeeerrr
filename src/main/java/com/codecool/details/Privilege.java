@@ -1,6 +1,6 @@
 package com.codecool.details;
 
-public enum PrivilegeEnumPrivileges {
+public enum Privilege {
     ADD_MENTOR,
     REMOVE_MENTOR,
     EDIT_MENTOR,

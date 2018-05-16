@@ -3,15 +3,15 @@ package com.codecool.details;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum EnumAccess {
+public enum Access {
     STUDENT {
         @Override
-        public List<EnumPrivileges> getPrivileges() {
-            List<EnumPrivileges> privileges = new ArrayList<>();
+        public List<Privilege> initPrivileges() {
+            List<Privilege> privileges = new ArrayList<>();
 
-            privileges.add(EnumPrivileges.EXIT);
-            privileges.add(EnumPrivileges.SUBMIT_ASSIGNMENT);
-            privileges.add(EnumPrivileges.GET_GRADES);
+            privileges.add(Privilege.EXIT);
+            privileges.add(Privilege.SUBMIT_ASSIGNMENT);
+            privileges.add(Privilege.GET_GRADES);
 
             return privileges;
         }
@@ -19,15 +19,15 @@ public enum EnumAccess {
 
     MANAGER {
         @Override
-        public List<EnumPrivileges> getPrivileges() {
-            List<EnumPrivileges> privileges = new ArrayList<>();
+        public List<Privilege> initPrivileges() {
+            List<Privilege> privileges = new ArrayList<>();
 
-            privileges.add(EnumPrivileges.EXIT);
-            privileges.add(EnumPrivileges.ADD_MENTOR);
-            privileges.add(EnumPrivileges.REMOVE_MENTOR);
-            privileges.add(EnumPrivileges.EDIT_MENTOR);
-            privileges.add(EnumPrivileges.GET_ALL_MENTORS);
-            privileges.add(EnumPrivileges.GET_ALL_STUDENTS);
+            privileges.add(Privilege.EXIT);
+            privileges.add(Privilege.ADD_MENTOR);
+            privileges.add(Privilege.REMOVE_MENTOR);
+            privileges.add(Privilege.EDIT_MENTOR);
+            privileges.add(Privilege.GET_ALL_MENTORS);
+            privileges.add(Privilege.GET_ALL_STUDENTS);
 
             return privileges;
         }
@@ -35,11 +35,11 @@ public enum EnumAccess {
 
     REGULAR_EMPLOYEE {
         @Override
-        public List<EnumPrivileges> getPrivileges() {
-            List<EnumPrivileges> privileges = new ArrayList<>();
+        public List<Privilege> initPrivileges() {
+            List<Privilege> privileges = new ArrayList<>();
 
-            privileges.add(EnumPrivileges.EXIT);
-            privileges.add(EnumPrivileges.GET_ALL_STUDENTS);
+            privileges.add(Privilege.EXIT);
+            privileges.add(Privilege.GET_ALL_STUDENTS);
 
             return privileges;
         }
@@ -47,21 +47,25 @@ public enum EnumAccess {
 
     MENTOR {
         @Override
-        public List<EnumPrivileges> getPrivileges() {
-            List<EnumPrivileges> privileges = new ArrayList<>();
+        public List<Privilege> initPrivileges() {
+            List<Privilege> privileges = new ArrayList<>();
 
-            privileges.add(EnumPrivileges.EXIT);
-            privileges.add(EnumPrivileges.GET_ALL_STUDENTS);
-            privileges.add(EnumPrivileges.ADD_ASSIGNMENT);
-            privileges.add(EnumPrivileges.GRADE_ASSIGNMENT);
-            privileges.add(EnumPrivileges.CHECK_ATTENDANCE);
-            privileges.add(EnumPrivileges.ADD_STUDENT);
-            privileges.add(EnumPrivileges.REMOVE_STUDENT);
-            privileges.add(EnumPrivileges.EDIT_STUDENT);
+            privileges.add(Privilege.EXIT);
+            privileges.add(Privilege.GET_ALL_STUDENTS);
+            privileges.add(Privilege.ADD_ASSIGNMENT);
+            privileges.add(Privilege.GRADE_ASSIGNMENT);
+            privileges.add(Privilege.CHECK_ATTENDANCE);
+            privileges.add(Privilege.ADD_STUDENT);
+            privileges.add(Privilege.REMOVE_STUDENT);
+            privileges.add(Privilege.EDIT_STUDENT);
 
             return privileges;
         }
     };
 
-    public abstract List<EnumPrivileges> getPrivileges();
+    private List<Privilege> privileges = initPrivileges();
+    public abstract List<Privilege> initPrivileges();
+    public List<Privilege> getPrivileges() {
+        return privileges;
+    }
 }
