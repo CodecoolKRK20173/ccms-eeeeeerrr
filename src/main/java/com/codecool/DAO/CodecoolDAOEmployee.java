@@ -5,10 +5,7 @@ import com.codecool.person.Manager;
 import com.codecool.person.Mentor;
 import com.codecool.person.RegularEmployee;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,8 +54,16 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
     }
 
 
-    public void saveToFile(String filename) {
-
+    public void saveToFile(String fileName) {
+        try (FileWriter fw = new FileWriter(fileName);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw)) {
+            for(CodecoolPerson c : getAllEmployees()) {
+                out.printf("%s,%s,%s,%s\n", c.getName(), c.getSurname(), c.getLogin(), c.getPassword());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addMentor(Mentor mentor) {

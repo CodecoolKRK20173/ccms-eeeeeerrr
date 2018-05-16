@@ -1,4 +1,4 @@
 package com.codecool.person;
 
-public class Mentor {
+public class Mentor extends CodecoolPerson{
 }
