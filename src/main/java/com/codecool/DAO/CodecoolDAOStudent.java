@@ -75,28 +75,24 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
 
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new FileReader(this.file));
             String line = reader.readLine();
 
             while(line != null){
+                List<Assignment> assignmentList = new ArrayList<>();
 
                 String[] oneLine = line.split(",");
+                String[] assignment = oneLine[ASSIGNMENT_INDEX].split(";");
 
-                String name = oneLine[0];
-                String surName = oneLine[1];
-                String login = oneLine[2];
-                String password = oneLine[3];
-                int attendence = Integer.parseInt(oneLine[4]);
-
-                List<Assignment> assignmentList = new ArrayList<Assignment>();
-
-                String[] assignment = oneLine[5].split(";");
-                String nameAssignment = assignment[0];
-                boolean isSubmitted = Boolean.parseBoolean(assignment[1]);
-                int grade = Integer.parseInt(assignment[2]);
+                String nameAssignment = assignment[NAME_INDEX];
+                boolean isSubmitted = Boolean.parseBoolean(assignment[ISSUBMITTED_INDEX]);
+                int grade = Integer.parseInt(assignment[GRADE_INDEX]);
 
                 assignmentList.add(new Assignment(nameAssignment, isSubmitted, grade));
-                addStudent(new Student(oneLine[0],oneLine[1],oneLine[2],oneLine[3],oneLine[4],assignmentList));
+
+                Integer attendence = Integer.valueOf(oneLine[ATTENDENCE_INDEX]);
+                addStudent(new Student(oneLine[NAME_INDEX], oneLine[SURNAME_INDEX], oneLine[LOGIN_INDEX],
+                            oneLine[PASSWORD_INDEX], attendence, assignmentList, oneLine[ACCESS_LIST_INDEX]));
 
                 line = reader.readLine();
             }
