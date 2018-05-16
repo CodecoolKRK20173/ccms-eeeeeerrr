@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface DAOInterfaceStudent {
 
-    AccessLevelList ACCESS;
     void addAssignment(Student student, Assignment assignment);
     void gradeAssignment(Student student, Assignment assignment, int grade);
     void checkAttendence(Student student);
