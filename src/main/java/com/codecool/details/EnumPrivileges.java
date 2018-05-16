@@ -13,5 +13,6 @@ public enum EnumPrivileges {
     REMOVE_STUDENT,
     EDIT_STUDENT,
     SUBMIT_ASSIGNMENT,
-    GET_GRADES
+    GET_GRADES,
+    EXIT
 }

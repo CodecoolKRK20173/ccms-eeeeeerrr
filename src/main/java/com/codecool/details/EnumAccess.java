@@ -9,17 +9,20 @@ public enum EnumAccess {
         public List<EnumPrivileges> getPrivileges() {
             List<EnumPrivileges> privileges = new ArrayList<>();
 
+            privileges.add(EnumPrivileges.EXIT);
             privileges.add(EnumPrivileges.SUBMIT_ASSIGNMENT);
             privileges.add(EnumPrivileges.GET_GRADES);
 
             return privileges;
         }
     },
+
     MANAGER {
         @Override
         public List<EnumPrivileges> getPrivileges() {
             List<EnumPrivileges> privileges = new ArrayList<>();
 
+            privileges.add(EnumPrivileges.EXIT);
             privileges.add(EnumPrivileges.ADD_MENTOR);
             privileges.add(EnumPrivileges.REMOVE_MENTOR);
             privileges.add(EnumPrivileges.EDIT_MENTOR);
@@ -29,21 +32,25 @@ public enum EnumAccess {
             return privileges;
         }
     },
+
     REGULAR_EMPLOYEE {
         @Override
         public List<EnumPrivileges> getPrivileges() {
             List<EnumPrivileges> privileges = new ArrayList<>();
 
+            privileges.add(EnumPrivileges.EXIT);
             privileges.add(EnumPrivileges.GET_ALL_STUDENTS);
 
             return privileges;
         }
     },
+
     MENTOR {
         @Override
         public List<EnumPrivileges> getPrivileges() {
             List<EnumPrivileges> privileges = new ArrayList<>();
 
+            privileges.add(EnumPrivileges.EXIT);
             privileges.add(EnumPrivileges.GET_ALL_STUDENTS);
             privileges.add(EnumPrivileges.ADD_ASSIGNMENT);
             privileges.add(EnumPrivileges.GRADE_ASSIGNMENT);
@@ -55,5 +62,6 @@ public enum EnumAccess {
             return privileges;
         }
     };
+
     public abstract List<EnumPrivileges> getPrivileges();
 }
