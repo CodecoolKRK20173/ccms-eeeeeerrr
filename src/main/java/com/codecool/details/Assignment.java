@@ -3,14 +3,15 @@ package com.codecool.details;
 public class Assignment {
     private final String NAME;
     private boolean isSubmitted;
-    private int grade;
+    private Integer grade;
 
-    public Assignment(String name){
+    public Assignment(String name, boolean isSubmitted, Integer grade){
         this.NAME = name;
-        this.isSubmitted = false;
+        this.isSubmitted = isSubmitted;
+        this.grade = grade;
     }
 
-    public int getGrade() {
+    public Integer getGrade() {
         return this.grade;
     }
 
@@ -18,8 +19,8 @@ public class Assignment {
         this.grade = grade;
     }
 
-    public void setSubmitted() {
-        this.isSubmitted = true;
+    public void setSubmitted(boolean isSubmitted) {
+        this.isSubmitted = isSubmitted;
     }
 
     public String getNAME() {
