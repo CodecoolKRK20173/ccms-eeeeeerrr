@@ -17,7 +17,14 @@ public enum EnumAccess {
         @Override
         public List<EnumPrivileges> getPrivileges() {
 
-            return null;
+            List<EnumPrivileges> privileges = new ArrayList<>();
+            privileges.add(EnumPrivileges.ADD_MENTOR);
+            privileges.add(EnumPrivileges.REMOVE_MENTOR);
+            privileges.add(EnumPrivileges.EDIT_MENTOR);
+            privileges.add(EnumPrivileges.GET_ALL_MENTORS);
+            privileges.add(EnumPrivileges.GET_ALL_STUDENTS);
+
+            return privileges;
         }
     },
     REGULAR_EMPLOYEE {
