@@ -2,6 +2,8 @@ package com.codecool;
 
 import com.codecool.DAO.CodecoolDAOEmployee;
 import com.codecool.DAO.CodecoolDAOStudent;
+import com.codecool.details.Access;
+import com.codecool.details.Privilege;
 import com.codecool.person.CodecoolPerson;
 
 import java.util.List;
@@ -54,16 +56,22 @@ public class Controller {
         } while (isRun(privilege));
     }
 
+    private Privilege choosePrivilage() {
+        return null;
+    }
+
     private boolean isRun(Privilege privilege) {
         return privilege != Privilege.EXIT;
     }
 
     private void displayMenu() {
-        view.displayMenu(user.getAccess());
+        view.displayMenu(user.getAccess().getPrivileges());
     }
 
     private void handleMenu(Privilege privilege) {
 
 
     }
+
+
 }
