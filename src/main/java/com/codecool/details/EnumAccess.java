@@ -6,8 +6,11 @@ public enum EnumAccess {
     STUDENT {
         @Override
         public List<EnumPrivileges> getPrivileges() {
+            List<EnumPrivileges> privileges = new ArrayList<>();
+            privileges.add(EnumPrivileges.SUBMIT_ASSIGMENT);
+            privileges.add(EnumPrivileges.GET_GRADES);
 
-            return null;
+            return privileges;
         }
     },
     MANAGER {
