@@ -27,4 +27,16 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         }
     }
 
+    public void submitAssignment(Student student, Assignment assignment) {
+        student.getAssignmentList();
+        //change is submitted
+    }
+
+    public void checkAttendence(Student student) {
+
+        int attend = student.getAttendence();
+        attend++;
+        student.setAttendence(attend);
+    }
+
     
