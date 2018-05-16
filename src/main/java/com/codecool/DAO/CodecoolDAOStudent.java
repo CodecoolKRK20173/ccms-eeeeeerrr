@@ -112,7 +112,7 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(this.file));
             for (Student student : studentList) {
-                writer.printf("%s,%s,%s,%s,%s;%s;%s,%s", student.getName(), student.getSurName(), student.getLogin(),
+                writer.printf("%s,%s,%s,%s,%s;%s;%s,%s\n", student.getName(), student.getSurName(), student.getLogin(),
                         student.getPassword(), student.getAssignmentList().get(NAME_INDEX),
                         Integer.toString(student.getAssignment().get(IS_SUBMITTED_INDEX)),
                         Boolean.toString(student.getAssignment().get(GRADE_INDEX)),
