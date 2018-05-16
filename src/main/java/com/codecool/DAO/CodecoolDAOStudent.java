@@ -96,4 +96,19 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         }
     }
 
-    
+    public void saveToFile() {
+
+        String filename = "student.csv";
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
+            for (Student student : studentList) {
+                writer.println(student.getName() + "," + student.getSurName() + "," + student.getLogin() + "," +
+                        student.getPassword() + "," + student.getAssignmentList().get(0) + ";" +
+                        Integer.toString(student.getAssignment().get(1)) + ";" +
+                        Boolean.toString(student.getAssignment().get(2));
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+}
