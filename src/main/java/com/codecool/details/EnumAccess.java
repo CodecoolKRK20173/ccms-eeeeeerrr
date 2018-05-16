@@ -17,7 +17,7 @@ public enum EnumAccess {
             return null;
         }
     },
-    EMPLOYEE {
+    REGULAR_EMPLOYEE {
         @Override
         public List<EnumPrivileges> getPrivileges() {
 
