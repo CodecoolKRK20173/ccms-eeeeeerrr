@@ -40,8 +40,17 @@ public enum EnumAccess {
     MENTOR {
         @Override
         public List<EnumPrivileges> getPrivileges() {
+            List<EnumPrivileges> privileges = new ArrayList<>();
 
-            return null;
+            privileges.add(EnumPrivileges.GET_ALL_STUDENTS);
+            privileges.add(EnumPrivileges.ADD_ASSIGNMENT);
+            privileges.add(EnumPrivileges.GRADE_ASSIGNMENT);
+            privileges.add(EnumPrivileges.CHECK_ATTENDANCE);
+            privileges.add(EnumPrivileges.ADD_STUDENT);
+            privileges.add(EnumPrivileges.REMOVE_STUDENT);
+            privileges.add(EnumPrivileges.EDIT_STUDENT);
+
+            return privileges;
         }
     };
     public abstract List<EnumPrivileges> getPrivileges();
