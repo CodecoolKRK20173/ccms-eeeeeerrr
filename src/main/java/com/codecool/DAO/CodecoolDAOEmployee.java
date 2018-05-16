@@ -17,6 +17,14 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
     private List<Manager> managerList = new ArrayList<>();
     private List<RegularEmployee> regularEmployeeList = new ArrayList<>();
 
+    public List<CodecoolPerson> getAllEmployees() {
+        List<CodecoolPerson> employeeList = new ArrayList<>();
+        employeeList.addAll(mentorList);
+        employeeList.addAll(managerList);
+        employeeList.addAll(regularEmployeeList);
+        return employeeList;
+    }
+
     public void readFile(String fileName) {
         final int NAME_INDEX = 0;
         final int SURNAME_INDEX = 1;
@@ -27,7 +35,7 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line = br.readLine();
             while (line != null) {
-                String[] myEmloyee = line.split(",");// STUDENT MANAGER, EMPLO?YEE, MENTOR
+                String[] myEmloyee = line.split(",");
                 if (myEmloyee[4].equals("MANAGER")) {
                     managerList.add(new Manager(myEmloyee[NAME_INDEX], myEmloyee[SURNAME_INDEX], myEmloyee[LOGIN_INDEX], myEmloyee[PASSWORD_INDEX], myEmloyee[ACCESS_INDEX]))
                 } else {
@@ -50,6 +58,7 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
 
 
     public void saveToFile(String filename) {
+
     }
 
     public void addMentor(Mentor mentor) {
