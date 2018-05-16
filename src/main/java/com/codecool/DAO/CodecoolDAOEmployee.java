@@ -15,7 +15,7 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
     private List<Manager> managerList;
     private List<RegularEmployee> regularEmployeeList;
 
-    CodecoolDAOEmployee() {
+    public CodecoolDAOEmployee() {
         this.mentorList = new ArrayList<>();
         this.managerList = new ArrayList<>();
         this.regularEmployeeList = new ArrayList<>();

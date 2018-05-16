@@ -36,11 +36,10 @@ public class Controller {
     }
 
     private String askPassword() {
-        return view.askUser("Provide password");
+        return view.askUserPassword();
     }
 
     private CodecoolPerson searchStudent(String login, String password) {
-        csvDAOStudent = new CodecoolDAOStudent();
 
         for (CodecoolPerson student : csvDAOStudent.getAllStudents()) {
             if (student.getLogin().equals(login) && student.getPassword().equals(password)) {

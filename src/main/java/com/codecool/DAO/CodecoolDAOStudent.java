@@ -95,7 +95,7 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
 
                 Integer attendence = Integer.valueOf(oneLine[ATTENDENCE_INDEX]);
                 addStudent(new Student(oneLine[NAME_INDEX], oneLine[SURNAME_INDEX], oneLine[LOGIN_INDEX],
-                            oneLine[PASSWORD_INDEX], attendence, assignmentList, oneLine[ACCESS_LIST_INDEX]));
+                            oneLine[PASSWORD_INDEX], attendence, assignmentList));
 
                 line = reader.readLine();
             }
