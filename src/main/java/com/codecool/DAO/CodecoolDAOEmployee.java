@@ -34,13 +34,13 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
             while (line != null) {
                 String[] myEmloyee = line.split(",");
                 if (myEmloyee[4].equals("MANAGER")) {
-                    managerList.add(new Manager(myEmloyee[NAME_INDEX], myEmloyee[SURNAME_INDEX], myEmloyee[LOGIN_INDEX], myEmloyee[PASSWORD_INDEX], myEmloyee[ACCESS_INDEX]))
+                    managerList.add(new Manager(myEmloyee[NAME_INDEX], myEmloyee[SURNAME_INDEX], myEmloyee[LOGIN_INDEX], myEmloyee[PASSWORD_INDEX]));
                 } else {
                     if (myEmloyee[4].equals("MENTOR")) {
-                        mentorList.add(new Mentor(myEmloyee[NAME_INDEX], myEmloyee[SURNAME_INDEX], myEmloyee[LOGIN_INDEX], myEmloyee[PASSWORD_INDEX], myEmloyee[ACCESS_INDEX]))
+                        mentorList.add(new Mentor(myEmloyee[NAME_INDEX], myEmloyee[SURNAME_INDEX], myEmloyee[LOGIN_INDEX], myEmloyee[PASSWORD_INDEX]));
                     } else {
                         if (myEmloyee[4].equals("REGULAR_EMPLOYEE")) {
-                            regularEmployeeList.add(new RegularEmployee(myEmloyee[NAME_INDEX], myEmloyee[SURNAME_INDEX], myEmloyee[LOGIN_INDEX], myEmloyee[PASSWORD_INDEX], myEmloyee[ACCESS_INDEX]))
+                            regularEmployeeList.add(new RegularEmployee(myEmloyee[NAME_INDEX], myEmloyee[SURNAME_INDEX], myEmloyee[LOGIN_INDEX], myEmloyee[PASSWORD_INDEX]));
                         }
                     }
                 }
@@ -59,7 +59,7 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw)) {
             for(CodecoolPerson c : getAllEmployees()) {
-                out.printf("%s,%s,%s,%s\n", c.getName(), c.getSurname(), c.getLogin(), c.getPassword());
+                out.printf("%s,%s,%s,%s,%s\n", c.getName(), c.getSurName(), c.getLogin(), c.getPassword(), c.getAccessLevel());
             }
         } catch (IOException e) {
             e.printStackTrace();

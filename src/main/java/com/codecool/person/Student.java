@@ -1,4 +1,33 @@
 package com.codecool.person;
 
-public class Student {
+import com.codecool.details.Assignment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Student extends CodecoolPerson {
+    private int attendance;
+    private List<Assignment> assignmentList;
+
+    public Student(String name, String surName, String login, String password) {
+        super(name, surName, login, password);
+        this.accessLevel = Access.STUDENT;
+        this.assignmentList = new ArrayList<>();
+    }
+
+    public int getAttendance() {
+        return attendance;
+    }
+
+    public List<Assignment> getAssignmentList() {
+        return assignmentList;
+    }
+
+    public void setAttendance(int attendance) {
+        this.attendance = attendance;
+    }
+
+    public void addAssignment(Assignment assignment) {
+        this.assignmentList.add(assignment);
+    }
 }
