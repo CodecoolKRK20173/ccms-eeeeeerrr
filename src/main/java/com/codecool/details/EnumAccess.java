@@ -1,5 +1,6 @@
 package com.codecool.details;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public enum EnumAccess {
@@ -7,7 +8,8 @@ public enum EnumAccess {
         @Override
         public List<EnumPrivileges> getPrivileges() {
             List<EnumPrivileges> privileges = new ArrayList<>();
-            privileges.add(EnumPrivileges.SUBMIT_ASSIGMENT);
+
+            privileges.add(EnumPrivileges.SUBMIT_ASSIGNMENT);
             privileges.add(EnumPrivileges.GET_GRADES);
 
             return privileges;
@@ -16,8 +18,8 @@ public enum EnumAccess {
     MANAGER {
         @Override
         public List<EnumPrivileges> getPrivileges() {
-
             List<EnumPrivileges> privileges = new ArrayList<>();
+
             privileges.add(EnumPrivileges.ADD_MENTOR);
             privileges.add(EnumPrivileges.REMOVE_MENTOR);
             privileges.add(EnumPrivileges.EDIT_MENTOR);
