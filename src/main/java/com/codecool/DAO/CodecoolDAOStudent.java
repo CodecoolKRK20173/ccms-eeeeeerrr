@@ -13,8 +13,8 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     private String file = "student.csv";
 
     public CodecoolDAOStudent() {
-        this.studentList = new ArrayList<Student>();
-        readFile(file);
+        this.studentList = new ArrayList<>();
+        readFile();
     }
 
     public void addAssignment(Student student, Assignment assignment) {
@@ -62,7 +62,17 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         return this.studentList;
     }
 
-    public void readFile(String file) {
+    public void readFile() {
+        final int NAME_INDEX = 0;
+        final int SURNAME_INDEX = 1;
+        final int ISSUBMITTED_INDEX = 1;
+        final int LOGIN_INDEX = 2;
+        final int GRADE_INDEX = 2;
+        final int PASSWORD_INDEX = 3;
+        final int ATTENDENCE_INDEX = 4;
+        final int ASSIGNMENT_INDEX = 5;
+        final int ACCESS_LIST_INDEX = 6;
+
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
