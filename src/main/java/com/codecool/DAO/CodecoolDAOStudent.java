@@ -116,7 +116,7 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
                         student.getPassword(), student.getAssignmentList().get(NAME_INDEX),
                         Integer.toString(student.getAssignment().get(IS_SUBMITTED_INDEX)),
                         Boolean.toString(student.getAssignment().get(GRADE_INDEX)),
-                        getAccessLevel);
+                        student.getAccessLevel());
             }
         } catch (IOException e) {
             System.err.println(e);
