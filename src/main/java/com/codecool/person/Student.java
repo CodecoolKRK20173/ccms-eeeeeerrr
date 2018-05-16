@@ -1,7 +1,9 @@
 package com.codecool.person;
 
+import com.codecool.details.Access;
 import com.codecool.details.Assignment;
 
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,5 +31,17 @@ public class Student extends CodecoolPerson {
 
     public void addAssignment(Assignment assignment) {
         this.assignmentList.add(assignment);
+    }
+
+    public int getAttendence() {
+        return 0;
+    }
+
+    public void setAttendence(int attend) {
+
+    }
+
+    public TemporalAccessor getAssignment() {
+        return null;
     }
 }

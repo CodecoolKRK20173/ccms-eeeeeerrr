@@ -1,5 +1,7 @@
 package com.codecool.person;
 
+import com.codecool.details.Access;
+
 public class CodecoolPerson {
     String name;
     String surName;
@@ -32,6 +34,10 @@ public class CodecoolPerson {
     }
 
     public String getAccessLevel() {
-        return Access.accessLevel.toString();
+        return accessLevel.toString();
+    }
+
+    public Access getAccess() {
+        return null;
     }
 }

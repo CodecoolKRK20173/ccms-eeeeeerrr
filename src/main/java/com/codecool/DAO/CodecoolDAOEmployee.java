@@ -81,6 +81,10 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
     public List<Mentor> getAllMentors() {
         return mentorList;
     }
+
+    public CodecoolPerson[] getAllEmployee() {
+        return new CodecoolPerson[0];
+    }
 }
 
 
