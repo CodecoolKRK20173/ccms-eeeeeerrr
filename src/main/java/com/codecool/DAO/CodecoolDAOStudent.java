@@ -103,15 +103,18 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     }
 
     public void saveToFile() {
+        final int NAME_INDEX = 0;
+        final int ISSUBMITTED_INDEX = 1;
+        final int GRADE_INDEX = 2;
 
-        String filename = "student.csv";
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
+            PrintWriter writer = new PrintWriter(new FileWriter(this.file));
             for (Student student : studentList) {
                 writer.println(student.getName() + "," + student.getSurName() + "," + student.getLogin() + "," +
-                        student.getPassword() + "," + student.getAssignmentList().get(0) + ";" +
-                        Integer.toString(student.getAssignment().get(1)) + ";" +
-                        Boolean.toString(student.getAssignment().get(2));
+                        student.getPassword() + "," + student.getAssignmentList().get(NAME_INDEX) + ";" +
+                        Integer.toString(student.getAssignment().get(ISSUBMITTED_INDEX)) + ";" +
+                        Boolean.toString(student.getAssignment().get(GRADE_INDEX) + "," +
+                        getAccessLevel);
             }
         } catch (IOException e) {
             System.err.println(e);
