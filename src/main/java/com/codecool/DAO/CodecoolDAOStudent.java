@@ -62,4 +62,38 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         return this.studentList;
     }
 
+    public void readFile(String file) {
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+
+            while(line != null){
+
+                String[] oneLine = line.split(",");
+
+                String name = oneLine[0];
+                String surName = oneLine[1];
+                String login = oneLine[2];
+                String password = oneLine[3];
+                int attendence = Integer.parseInt(oneLine[4]);
+
+                List<Assignment> assignmentList = new ArrayList<Assignment>();
+
+                String[] assignment = oneLine[5].split(";");
+                String nameAssignment = assignment[0];
+                boolean isSubmitted = Boolean.parseBoolean(assignment[1]);
+                int grade = Integer.parseInt(assignment[2]);
+
+                assignmentList.add(new Assignment(nameAssignment, isSubmitted, grade));
+                addStudent(new Student(oneLine[0],oneLine[1],oneLine[2],oneLine[3],oneLine[4],assignmentList));
+
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            System.out.println("There is no such file");
+            System.exit(0);
+        }
+    }
+
     
