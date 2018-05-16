@@ -18,7 +18,7 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     }
 
     public void addAssignment(Student student, Assignment assignment) {
-        student.getAssignmentList().add(assignment);
+        student.addAssignment(assignment);
     }
 
     public void gradeAssignment(Student student, Assignment assignment, int grade) {
@@ -28,12 +28,14 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     }
 
     public void submitAssignment(Student student, Assignment assignment) {
-        student.getAssignmentList();
-        //change is submitted
+        for(Assignment assignment1 : student.getAssignmentList()) {
+            if (assignment1.equals(assignment)) {
+                assignment.setIsSubmit(true);
+            }
+        }
     }
 
     public void checkAttendence(Student student) {
-
         int attend = student.getAttendence();
         attend++;
         student.setAttendence(attend);
@@ -104,16 +106,16 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
 
     public void saveToFile() {
         final int NAME_INDEX = 0;
-        final int ISSUBMITTED_INDEX = 1;
+        final int IS_SUBMITTED_INDEX = 1;
         final int GRADE_INDEX = 2;
 
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(this.file));
             for (Student student : studentList) {
-                writer.println(student.getName() + "," + student.getSurName() + "," + student.getLogin() + "," +
-                        student.getPassword() + "," + student.getAssignmentList().get(NAME_INDEX) + ";" +
-                        Integer.toString(student.getAssignment().get(ISSUBMITTED_INDEX)) + ";" +
-                        Boolean.toString(student.getAssignment().get(GRADE_INDEX) + "," +
+                writer.printf("%s,%s,%s,%s,%s;%s;%s,%s", student.getName(), student.getSurName(), student.getLogin(),
+                        student.getPassword(), student.getAssignmentList().get(NAME_INDEX),
+                        Integer.toString(student.getAssignment().get(IS_SUBMITTED_INDEX)),
+                        Boolean.toString(student.getAssignment().get(GRADE_INDEX)),
                         getAccessLevel);
             }
         } catch (IOException e) {
