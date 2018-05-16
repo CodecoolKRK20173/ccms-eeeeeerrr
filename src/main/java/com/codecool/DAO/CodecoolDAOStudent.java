@@ -17,4 +17,14 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         readFile(file);
     }
 
+    public void addAssignment(Student student, Assignment assignment) {
+        student.getAssignmentList().add(assignment);
+    }
+
+    public void gradeAssignment(Student student, Assignment assignment, int grade) {
+        if (student.getAssignmentList.contains(assignment)) {
+            assignment.setGrade(43);
+        }
+    }
+
     
