@@ -44,8 +44,26 @@ public class Controller {
         }
         return null;
     }
-    
-    public void handleMenu() {
+
+    public void run() {
+        Privilege privilege;
+        do {
+            displayMenu();
+            privilege = choosePrivilage();
+            handleMenu(privilege);
+        } while (isRun(privilege));
+    }
+
+    private boolean isRun(Privilege privilege) {
+        return privilege != Privilege.EXIT;
+    }
+
+    private void displayMenu() {
+        view.displayMenu(user.getAccess());
+    }
+
+    private void handleMenu(Privilege privilege) {
+
 
     }
 }
