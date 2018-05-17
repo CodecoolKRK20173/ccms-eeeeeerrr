@@ -81,10 +81,6 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
         mentorList.remove(mentor);
     }
 
-    public void editMentor(Mentor mentor) {
-
-    }
-
     public List<Mentor> getAllMentors() {
         return mentorList;
     }

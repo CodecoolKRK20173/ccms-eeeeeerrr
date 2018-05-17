@@ -7,6 +7,7 @@ import com.codecool.details.Privilege;
 import com.codecool.person.CodecoolPerson;
 import com.codecool.person.Mentor;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,14 +105,15 @@ public class Controller {
         csvDAOEmployee.addMentor(createMentor());
     }
 
-    private Mentor getMentor() {
+    private Mentor chooseMentor() {
         String login;
         login = view.askUser("Provide login:  ");
         for (Mentor mentor : csvDAOEmployee.getAllMentors()) {
             if(mentor.getLogin().equals(login)) {
                 return mentor;
             }
-            System.out.println("There's no such mentor");
+            view.displayLine("There's no such mentor");
+            chooseMentor();
         }
         return null;
     }
@@ -120,13 +122,13 @@ public class Controller {
 
     private void removeMentor(){
         view.displayLine("You are going to remove mentor: ");
-        csvDAOEmployee.removeMentor(getMentor());
+        csvDAOEmployee.removeMentor(chooseMentor());
     }
 
     private void editMentor() {
         String answer;
         view.displayLine("You are going to edit mentor: ");
-        Mentor mentor = getMentor();
+        Mentor mentor = chooseMentor();
         System.out.println(mentor);
 
         answer = view.askUser("Would you like to change name? (y/n)");
@@ -148,5 +150,12 @@ public class Controller {
         if(answer.equals("y")) {
             mentor.setPassword(view.askUser("Password: "));
         }
+    }
+
+    public void displayMentors() {
+        for (Mentor mentor : csvDAOEmployee.getAllMentors()) {
+            System.out.println(mentor);
+        }
+
     }
 }
