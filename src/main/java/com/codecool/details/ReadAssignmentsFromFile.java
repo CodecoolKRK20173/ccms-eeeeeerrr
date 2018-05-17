@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReadAssignmentsFromFile {
 
-    private String file = "src/main/java/com/codecool/resources/assignment.csv";
+    private String file = "src/main/resources/assignment.csv";
 
     public List<String> createlist(){
         try {

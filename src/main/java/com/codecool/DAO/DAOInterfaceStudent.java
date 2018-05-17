@@ -9,10 +9,8 @@ public interface DAOInterfaceStudent {
 
     void addAssignment(Student student, Assignment assignment);
     void gradeAssignment(Student student, Assignment assignment, int grade);
-    void checkAttendence(Student student);
     void addStudent(Student student);
     void removeStudent(Student student);
-    void editStudent(Student student);
     void submitAssignment(Student student, Assignment assignment);
     List<Assignment> getAllGrades(Student student);
     List<Student> getAllStudent();

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CodecoolDAOEmployee implements DAOInterfaceEmp {
-    private String file = "employee.csv";
+    private String file = "src/main/resources/employee.csv";
     private List<Mentor> mentorList;
     private List<Manager> managerList;
     private List<RegularEmployee> regularEmployeeList;
@@ -66,7 +66,7 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw)) {
             for(CodecoolPerson c : getAllEmployees()) {
-                out.printf("%s,%s,%s,%s,%s\n", c.getName(), c.getSurName(), c.getLogin(), c.getPassword(), c.getAccessLevel());
+                out.printf("%s,%s,%s,%s,%s\n", c.getName(), c.getSurName(), c.getLogin(), c.getPassword(), c.getAccess().toString());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,9 +85,6 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
         return mentorList;
     }
 
-    public CodecoolPerson[] getAllEmployee() {
-        return new CodecoolPerson[0];
-    }
 }
 
 

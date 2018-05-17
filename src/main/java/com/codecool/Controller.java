@@ -26,15 +26,16 @@ public class Controller {
         this.csvDAOStudent = new CodecoolDAOStudent();
         this.csvDAOEmployee = new CodecoolDAOEmployee();
         this.assignmentList = new ReadAssignmentsFromFile().createlist();
+        signIn();
     }
 
     public void signIn() {
         String login = askLogin();
         String password = askPassword();
 
-        user = searchStudent(login, password);
+        searchStudent(login, password);
         if (user == null) {
-            user = searchEmployee(login, password);
+            searchEmployee(login, password);
         }
     }
     private String askLogin() {
@@ -45,24 +46,20 @@ public class Controller {
         return view.askUserPassword();
     }
 
-    private CodecoolPerson searchStudent(String login, String password) {
-
+    private void searchStudent(String login, String password) {
         for (CodecoolPerson student : csvDAOStudent.getAllStudent()) {
             if (student.getLogin().equals(login) && student.getPassword().equals(password)) {
-                return student;
+                this.user = student;
             }
         }
-        return null;
     }
 
-    private CodecoolPerson searchEmployee(String login, String password) {
-
-        for (CodecoolPerson employee : csvDAOEmployee.getAllEmployee()) {
+    private void searchEmployee(String login, String password) {
+        for (CodecoolPerson employee : csvDAOEmployee.getAllEmployees()) {
             if (employee.getLogin().equals(login) && employee.getPassword().equals(password)) {
-                return employee;
+                this.user = employee;
             }
         }
-        return null;
     }
 
     public void run() {
@@ -91,6 +88,7 @@ public class Controller {
     }
 
     private void displayMenu() {
+        System.out.println(user);
         view.displayMenu(user.getAccess().getPrivileges());
     }
 
@@ -247,7 +245,7 @@ public class Controller {
             }
         }
         view.displayLine("There's no such mentor");
-        chooseMentor();
+        return chooseMentor();
     }
 
 

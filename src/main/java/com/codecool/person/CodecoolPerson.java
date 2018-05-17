@@ -33,12 +33,8 @@ public class CodecoolPerson {
         return password;
     }
 
-    public String getAccessLevel() {
-        return accessLevel.toString();
-    }
-
     public Access getAccess() {
-        return null;
+        return accessLevel;
     }
 
     public void setName(String name) {

@@ -11,7 +11,7 @@ import java.util.List;
 public class CodecoolDAOStudent implements DAOInterfaceStudent{
 
     private List<Student> studentList;
-    private String file = "src/main/java/com/codecool/DAO/student.csv";
+    private String file = "src/main/resources/student.csv";
 
     public CodecoolDAOStudent() {
         this.studentList = new ArrayList<>();
