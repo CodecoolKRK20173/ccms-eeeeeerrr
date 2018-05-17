@@ -314,15 +314,11 @@ public class Controller {
     }
 
     public void displayMentors() {
-        for (Mentor mentor : csvDAOEmployee.getAllMentors()) {
-            System.out.println(mentor);
-        }
+        view.displayMentors(csvDAOEmployee.getAllMentors());
     }
 
     public void displayStudents() {
-        for (Student student : csvDAOStudent.getAllStudent()) {
-            System.out.println(student);
-        }
+        view.displayStudents(csvDAOStudent.getAllStudent());
     }
 
     private Student createStudent() {
