@@ -137,9 +137,10 @@ public class Controller {
             case GET_GRADES:
                 displayGrades();
                 break;
+            case LOG_OUT:
+                logOut();
+                break;
             case EXIT:
-                csvDAOStudent.saveToFile();
-                csvDAOEmployee.saveToFile();
                 exit();
                 break;
             default:
@@ -147,6 +148,11 @@ public class Controller {
 
         }
 
+    }
+
+    private void logOut() {
+        exit();
+        signIn();
     }
 
     private void addAssignment() {
@@ -223,6 +229,8 @@ public class Controller {
     }
 
     private void exit() {
+        csvDAOStudent.saveToFile();
+        csvDAOEmployee.saveToFile();
         view.displayLine("Goodbye :)");
     }
 

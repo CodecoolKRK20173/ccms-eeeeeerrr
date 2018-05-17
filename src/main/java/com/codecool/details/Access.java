@@ -12,6 +12,7 @@ public enum Access {
             privileges.add(Privilege.EXIT);
             privileges.add(Privilege.SUBMIT_ASSIGNMENT);
             privileges.add(Privilege.GET_GRADES);
+            privileges.add(Privilege.LOG_OUT);
 
             return privileges;
         }
@@ -28,6 +29,7 @@ public enum Access {
             privileges.add(Privilege.EDIT_MENTOR);
             privileges.add(Privilege.GET_ALL_MENTORS);
             privileges.add(Privilege.GET_ALL_STUDENTS);
+            privileges.add(Privilege.LOG_OUT);
 
             return privileges;
         }
@@ -40,6 +42,7 @@ public enum Access {
 
             privileges.add(Privilege.EXIT);
             privileges.add(Privilege.GET_ALL_STUDENTS);
+            privileges.add(Privilege.LOG_OUT);
 
             return privileges;
         }
@@ -58,6 +61,7 @@ public enum Access {
             privileges.add(Privilege.ADD_STUDENT);
             privileges.add(Privilege.REMOVE_STUDENT);
             privileges.add(Privilege.EDIT_STUDENT);
+            privileges.add(Privilege.LOG_OUT);
 
             return privileges;
         }

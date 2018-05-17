@@ -14,5 +14,6 @@ public enum Privilege {
     EDIT_STUDENT,
     SUBMIT_ASSIGNMENT,
     GET_GRADES,
+    LOG_OUT,
     EXIT
 }
