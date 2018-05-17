@@ -12,21 +12,14 @@ import java.util.List;
 public class Controller implements Changeable {
     private CodecoolDAOStudent csvDAOStudent;
     private CodecoolDAOEmployee csvDAOEmployee;
-    private CodecoolPerson user;
+    private static CodecoolPerson user;
     private List<String> assignmentList;
-    //private View view = new View();
-    private StudentController studentController;
-    private EmployeeController employeeController;
-    //private LoginController loginController;
+
 
     public Controller() {
         this.csvDAOStudent = new CodecoolDAOStudent();
         this.csvDAOEmployee = new CodecoolDAOEmployee();
         this.assignmentList = new ReadAssignmentsFromFile().createlist();
-        this.studentController = new StudentController();
-        this.employeeController = new EmployeeController();
-        //this.loginController = new LoginController();
-        loginController.signIn();
     }
 
     public LoginController getLoginController() {
@@ -57,16 +50,7 @@ public class Controller implements Changeable {
         this.user = user;
     }
 
-    public void run() {
-        Privilege privilege;
-        do {
-            displayMenu();
-            privilege = choosePrivilege();
-            handleMenu(privilege);
-        } while (isRun(privilege));
-    }
-
-    private Privilege choosePrivilege() {
+    public Privilege choosePrivilege() {
         List<Privilege> privileges = user.getAccess().getPrivileges();
         Integer answer = Integer.valueOf(view.askUser("Which option would you like to choose(number)"));
         for(int i = 0; i < privileges.size(); i++) {
@@ -78,81 +62,29 @@ public class Controller implements Changeable {
         return choosePrivilege();
     }
 
-    private boolean isRun(Privilege privilege) {
+    public boolean isRun(Privilege privilege) {
         return privilege != Privilege.EXIT;
     }
 
-    private void displayMenu() {
+    public void displayMenu() {
         view.displayMenu(user.getAccess().getPrivileges());
     }
 
-    private void handleMenu(Privilege privilege) {
-        switch (privilege) {
-            case ADD_MENTOR:
-                employeeController.addMentor();
-                break;
-            case REMOVE_MENTOR:
-                employeeController.removeMentor();
-                break;
-            case EDIT_MENTOR:
-                employeeController.editMentor();
-                break;
-            case GET_ALL_MENTORS:
-                employeeController.displayMentors();
-                break;
-            case GET_ALL_STUDENTS:
-                studentController.displayStudents();
-                break;
-            case ADD_ASSIGNMENT:
-                studentController.addAssignment();
-                break;
-            case GRADE_ASSIGNMENT:
-                studentController.gradeAssignment();
-                break;
-            case CHECK_ATTENDANCE:
-                studentController.checkAttendance();
-                break;
-            case ADD_STUDENT:
-                studentController.addStudent();
-                break;
-            case REMOVE_STUDENT:
-                studentController.removeStudent();
-                break;
-            case EDIT_STUDENT:
-                studentController.editStudent();
-                break;
-            case SUBMIT_ASSIGNMENT:
-                studentController.submitAssignment();
-                break;
-            case GET_GRADES:
-                displayGrades();
-                break;
-            case LOG_OUT:
-                logOut();
-                break;
-            case EXIT:
-                exit();
-                break;
-            default:
-                errorMessage();
-        }
-    }
-
-    private void logOut() {
+    public void logOut() {
         exit();
         loginController.signIn();
     }
 
-    private void displayGrades() {
+    public void displayGrades() {
         view.displayLine("Your grades: ");
         view.displayAssignments(((Student) user).getAssignmentList());
     }
 
-    private void errorMessage() {
+    public void errorMessage() {
         view.displayLine("You did something wrong");
     }
 
-    private void exit() {
+    public void exit() {
         csvDAOStudent.saveToFile();
         csvDAOEmployee.saveToFile();
         view.displayLine("Goodbye :)");

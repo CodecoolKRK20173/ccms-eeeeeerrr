@@ -4,8 +4,8 @@ import com.codecool.View;
 import com.codecool.person.CodecoolPerson;
 
 public interface Changeable {
-    public LoginController loginController = new LoginController();
-    public View view = new View();
+    LoginController loginController = new LoginController();
+    View view = new View();
 
     default void changePassword(CodecoolPerson person) {
         String answer = view.askUser("Would you like to change password? (y/n)");
@@ -17,7 +17,7 @@ public interface Changeable {
     default void changeLogin(CodecoolPerson person) {
         String answer = view.askUser("Would you like to change login? (y/n)");
         if(answer.equals("y")) {
-            person.setLogin(loginController.uniqueLogin());
+            person.setLogin(new LoginController().uniqueLogin());
         }
     }
 

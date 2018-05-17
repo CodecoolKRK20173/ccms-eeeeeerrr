@@ -16,7 +16,7 @@ public class EmployeeController extends Controller{
 
         name = view.askUser("Name: ");
         surName = view.askUser("Surname: ");
-        login = super.getLoginController().uniqueLogin();
+        login = new LoginController().uniqueLogin();
         password = view.askUser("Password: ");
 
         return new Mentor(name, surName, login, password);
@@ -34,7 +34,7 @@ public class EmployeeController extends Controller{
         }
 
         String login;
-        login = super.getLoginController().askLogin();
+        login = new LoginController().askLogin();
         for (Mentor mentor : mentors) {
             if(mentor.getLogin().equals(login)) {
                 return mentor;

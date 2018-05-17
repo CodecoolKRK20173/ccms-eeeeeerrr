@@ -8,8 +8,7 @@ import com.codecool.person.CodecoolPerson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginController extends Controller{
-    //private View view = new View();
+public class LoginController extends Controller {
 
     public void signIn() {
         String login = askLogin();

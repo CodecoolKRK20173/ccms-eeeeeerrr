@@ -1,6 +1,5 @@
 package com.codecool.controllers;
 
-import com.codecool.View;
 import com.codecool.details.Assignment;
 import com.codecool.person.CodecoolPerson;
 import com.codecool.person.Student;
@@ -23,7 +22,7 @@ public class StudentController extends Controller {
 
         name = view.askUser("Name: ");
         surName = view.askUser("Surname: ");
-        login = super.getLoginController().uniqueLogin();
+        login = new LoginController().uniqueLogin();
         password = view.askUser("Password: ");
 
         int attendance = 0;
@@ -42,7 +41,7 @@ public class StudentController extends Controller {
             view.displayLine("No students.");
             return null;
         }
-        String login = super.getLoginController().askLogin();
+        String login = new LoginController().askLogin();
         for (Student student : students) {
             if(student.getLogin().equals(login)) {
                 return student;
@@ -127,7 +126,7 @@ public class StudentController extends Controller {
 
     private Assignment chooseAssignment() {
         return chooseAssignment((Student) super.getUser());
-}
+    }
 
     private Assignment chooseAssignment(Student student) {
         List<Assignment> assignments = student.getAssignmentList();
@@ -144,7 +143,8 @@ public class StudentController extends Controller {
         }
         return assignments.get(assignmentNumber);
     }
-    private void displayGrades() {
+
+    public void displayGrades() {
         view.displayLine("Your grades: ");
         view.displayAssignments(((Student) super.getUser()).getAssignmentList());
     }

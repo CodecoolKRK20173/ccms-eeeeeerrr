@@ -1,10 +1,11 @@
 package com.codecool;
 
+import com.codecool.controllers.AppController;
 import com.codecool.controllers.Controller;
 
 public class App {
     public static void main(String[] args) {
-        Controller controller = new Controller();
+        AppController controller = new AppController();
         controller.run();
     }
 }
