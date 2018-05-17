@@ -5,6 +5,7 @@ import com.codecool.DAO.CodecoolDAOStudent;
 import com.codecool.details.Access;
 import com.codecool.details.Assignment;
 import com.codecool.details.Privilege;
+import com.codecool.details.ReadAssignmentsFromFile;
 import com.codecool.person.CodecoolPerson;
 import com.codecool.person.Mentor;
 import com.codecool.person.Student;
@@ -23,7 +24,7 @@ public class Controller {
     public Controller() {
         this.csvDAOStudent = new CodecoolDAOStudent();
         this.csvDAOEmployee = new CodecoolDAOEmployee();
-        this.assignmentList = new ArrayList<>();
+        this.assignmentList = new ReadAssignmentsFromFile().createlist();
     }
 
     public void signIn() {
