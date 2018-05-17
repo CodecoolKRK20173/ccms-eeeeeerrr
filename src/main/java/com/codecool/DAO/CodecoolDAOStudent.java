@@ -1,6 +1,7 @@
 package com.codecool.DAO;
 
 import com.codecool.details.Assignment;
+import com.codecool.person.CodecoolPerson;
 import com.codecool.person.Student;
 
 import java.io.*;
@@ -13,27 +14,29 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     private String file = "student.csv";
 
     public CodecoolDAOStudent() {
-        this.studentList = new ArrayList<Student>();
-        readFile(file);
+        this.studentList = new ArrayList<>();
+        readFile();
     }
 
     public void addAssignment(Student student, Assignment assignment) {
-        student.getAssignmentList().add(assignment);
+        student.addAssignment(assignment);
     }
 
     public void gradeAssignment(Student student, Assignment assignment, int grade) {
-        if (student.getAssignmentList.contains(assignment)) {
+        if (student.getAssignmentList().contains(assignment)) {
             assignment.setGrade(43);
         }
     }
 
     public void submitAssignment(Student student, Assignment assignment) {
-        student.getAssignmentList();
-        //change is submitted
+        for(Assignment assignment1 : student.getAssignmentList()) {
+            if (assignment1.equals(assignment)) {
+                assignment.setSubmitted(true);
+            }
+        }
     }
 
     public void checkAttendence(Student student) {
-
         int attend = student.getAttendence();
         attend++;
         student.setAttendence(attend);
@@ -62,31 +65,37 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         return this.studentList;
     }
 
-    public void readFile(String file) {
+    public void readFile() {
+        final int NAME_INDEX = 0;
+        final int SURNAME_INDEX = 1;
+        final int ISSUBMITTED_INDEX = 1;
+        final int LOGIN_INDEX = 2;
+        final int GRADE_INDEX = 2;
+        final int PASSWORD_INDEX = 3;
+        final int ATTENDENCE_INDEX = 4;
+        final int ASSIGNMENT_INDEX = 5;
+        final int ACCESS_LIST_INDEX = 6;
+
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new FileReader(this.file));
             String line = reader.readLine();
 
             while(line != null){
+                List<Assignment> assignmentList = new ArrayList<>();
 
                 String[] oneLine = line.split(",");
+                String[] assignment = oneLine[ASSIGNMENT_INDEX].split(";");
 
-                String name = oneLine[0];
-                String surName = oneLine[1];
-                String login = oneLine[2];
-                String password = oneLine[3];
-                int attendence = Integer.parseInt(oneLine[4]);
-
-                List<Assignment> assignmentList = new ArrayList<Assignment>();
-
-                String[] assignment = oneLine[5].split(";");
-                String nameAssignment = assignment[0];
-                boolean isSubmitted = Boolean.parseBoolean(assignment[1]);
-                int grade = Integer.parseInt(assignment[2]);
+                String nameAssignment = assignment[NAME_INDEX];
+                boolean isSubmitted = Boolean.parseBoolean(assignment[ISSUBMITTED_INDEX]);
+                int grade = Integer.parseInt(assignment[GRADE_INDEX]);
 
                 assignmentList.add(new Assignment(nameAssignment, isSubmitted, grade));
-                addStudent(new Student(oneLine[0],oneLine[1],oneLine[2],oneLine[3],oneLine[4],assignmentList));
+
+                Integer attendence = Integer.valueOf(oneLine[ATTENDENCE_INDEX]);
+                addStudent(new Student(oneLine[NAME_INDEX], oneLine[SURNAME_INDEX], oneLine[LOGIN_INDEX],
+                            oneLine[PASSWORD_INDEX], attendence, assignmentList, oneLine[ACCESS_LIST_INDEX]));
 
                 line = reader.readLine();
             }
@@ -97,18 +106,25 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     }
 
     public void saveToFile() {
+        final int NAME_INDEX = 0;
+        final int IS_SUBMITTED_INDEX = 1;
+        final int GRADE_INDEX = 2;
 
-        String filename = "student.csv";
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
+            PrintWriter writer = new PrintWriter(new FileWriter(this.file));
             for (Student student : studentList) {
-                writer.println(student.getName() + "," + student.getSurName() + "," + student.getLogin() + "," +
-                        student.getPassword() + "," + student.getAssignmentList().get(0) + ";" +
-                        Integer.toString(student.getAssignment().get(1)) + ";" +
-                        Boolean.toString(student.getAssignment().get(2));
+                writer.printf("%s,%s,%s,%s,%s;%s;%s,%s\n", student.getName(), student.getSurName(), student.getLogin(),
+                        student.getPassword(), student.getAssignmentList().get(NAME_INDEX),
+                        Integer.toString(student.getAssignment().get(IS_SUBMITTED_INDEX)),
+                        Boolean.toString(student.getAssignment().get(GRADE_INDEX)),
+                        student.getAccessLevel());
             }
         } catch (IOException e) {
             System.err.println(e);
         }
+    }
+
+    public CodecoolPerson[] getAllStudents() {
+        return new CodecoolPerson[0];
     }
 }
