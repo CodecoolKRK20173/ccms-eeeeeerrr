@@ -131,6 +131,10 @@ public class Controller {
 
     }
 
+    private void errorMessage() {
+        view.displayLine("You did something wrong");
+    }
+
     private void exit() {
         view.displayLine("Goodbye :)");
     }
