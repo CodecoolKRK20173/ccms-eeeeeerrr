@@ -1,5 +1,7 @@
 package com.codecool.controllers;
 
+import com.codecool.DAO.CodecoolDAOEmployee;
+import com.codecool.DAO.CodecoolDAOStudent;
 import com.codecool.details.Assignment;
 import com.codecool.person.CodecoolPerson;
 import com.codecool.person.Student;
@@ -9,6 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StudentController extends Controller {
+
+    public StudentController(CodecoolDAOStudent csvDAOStudent, CodecoolDAOEmployee csvDAOEmployee) {
+        super.setCsvDAOStudent(csvDAOStudent);
+        super.setCsvDAOEmployee(csvDAOEmployee);
+    }
 
     public void displayStudents() {
         view.displayStudents(super.getCsvDAOStudent().getAllStudent());
@@ -22,7 +29,7 @@ public class StudentController extends Controller {
 
         name = view.askUser("Name: ");
         surName = view.askUser("Surname: ");
-        login = new LoginController().uniqueLogin();
+        login = super.uniqueLogin();
         password = view.askUser("Password: ");
 
         int attendance = 0;
@@ -41,7 +48,7 @@ public class StudentController extends Controller {
             view.displayLine("No students.");
             return null;
         }
-        String login = new LoginController().askLogin();
+        String login = super.askLogin();
         for (Student student : students) {
             if(student.getLogin().equals(login)) {
                 return student;

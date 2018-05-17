@@ -1,5 +1,7 @@
 package com.codecool.controllers;
 
+import com.codecool.DAO.CodecoolDAOEmployee;
+import com.codecool.DAO.CodecoolDAOStudent;
 import com.codecool.View;
 import com.codecool.person.Mentor;
 
@@ -7,6 +9,11 @@ import java.util.List;
 
 public class EmployeeController extends Controller{
     private View view = new View();
+
+    public EmployeeController(CodecoolDAOEmployee csvDAOEmployee, CodecoolDAOStudent csvDAOStudent) {
+        super.setCsvDAOEmployee(csvDAOEmployee);
+        super.setCsvDAOStudent(csvDAOStudent);
+    }
 
     public Mentor createMentor() {
         String name;
@@ -16,7 +23,7 @@ public class EmployeeController extends Controller{
 
         name = view.askUser("Name: ");
         surName = view.askUser("Surname: ");
-        login = new LoginController().uniqueLogin();
+        login = super.uniqueLogin();
         password = view.askUser("Password: ");
 
         return new Mentor(name, surName, login, password);
@@ -34,7 +41,7 @@ public class EmployeeController extends Controller{
         }
 
         String login;
-        login = new LoginController().askLogin();
+        login = super.askLogin();
         for (Mentor mentor : mentors) {
             if(mentor.getLogin().equals(login)) {
                 return mentor;
@@ -67,3 +74,4 @@ public class EmployeeController extends Controller{
         view.displayMentors(super.getCsvDAOEmployee().getAllMentors());
     }
 }
+

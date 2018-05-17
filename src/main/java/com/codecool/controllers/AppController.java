@@ -1,16 +1,20 @@
 package com.codecool.controllers;
 
+import com.codecool.DAO.CodecoolDAOEmployee;
+import com.codecool.DAO.CodecoolDAOStudent;
 import com.codecool.details.Privilege;
 
 public class AppController extends Controller {
 
-    private StudentController studentController = new StudentController();
-    private EmployeeController employeeController = new EmployeeController();
-    private LoginController loginController;
+    private StudentController studentController;
+    private EmployeeController employeeController;
 
-    public AppController() {
-        this.loginController = new LoginController();
-        loginController.signIn();
+    public AppController(CodecoolDAOStudent csvDAOStudent, CodecoolDAOEmployee csvDAOEmployee) {
+        studentController = new StudentController(csvDAOStudent, csvDAOEmployee);
+        employeeController = new EmployeeController(csvDAOEmployee, csvDAOStudent);
+        this.setCsvDAOEmployee(csvDAOEmployee);
+        this.setCsvDAOStudent(csvDAOStudent);
+        signIn();
     }
 
     public void handleMenu(Privilege privilege) {
@@ -46,7 +50,7 @@ public class AppController extends Controller {
                 studentController.removeStudent();
                 break;
             case EDIT_STUDENT:
-                new StudentController().editStudent();
+                studentController.editStudent();
                 break;
             case SUBMIT_ASSIGNMENT:
                 studentController.submitAssignment();
@@ -55,14 +59,25 @@ public class AppController extends Controller {
                 studentController.displayGrades();
                 break;
             case LOG_OUT:
-                super.logOut();
+                logOut();
                 break;
             case EXIT:
-                super.exit();
+                exit();
                 break;
             default:
                 super.errorMessage();
         }
+    }
+
+    public void exit() {
+        getCsvDAOStudent().saveToFile();
+        getCsvDAOEmployee().saveToFile();
+        view.displayLine("Goodbye :)");
+    }
+
+    public void logOut() {
+        exit();
+        signIn();
     }
 
     public void run() {

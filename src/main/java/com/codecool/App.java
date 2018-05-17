@@ -1,11 +1,14 @@
 package com.codecool;
 
+import com.codecool.DAO.CodecoolDAOEmployee;
+import com.codecool.DAO.CodecoolDAOStudent;
 import com.codecool.controllers.AppController;
-import com.codecool.controllers.Controller;
 
 public class App {
     public static void main(String[] args) {
-        AppController controller = new AppController();
+        CodecoolDAOStudent csvDAOStudent = new CodecoolDAOStudent();
+        CodecoolDAOEmployee csvDAOEmployee = new CodecoolDAOEmployee();
+        AppController controller = new AppController(csvDAOStudent, csvDAOEmployee);
         controller.run();
     }
 }

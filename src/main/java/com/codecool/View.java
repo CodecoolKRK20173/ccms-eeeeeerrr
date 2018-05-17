@@ -70,10 +70,10 @@ public class View {
 
     public void displayAssignments(List<Assignment> assignments) {
         Assignment assignment;
-        System.out.println("NAME | IS_SUBMITTED | GRADE ");
+        displayLine(String.format("    |%-18s| %-15s|%-15s|", "NAME", "IS_SUBMITTED", "GRADE"));
         for (int i = 0; i < assignments.size(); i++) {
             assignment = assignments.get(i);
-            System.out.printf("\t(%d) %s | %s | %d \n", i + 1, assignment.getNAME(), assignment.getIsSubmitted(), assignment.getGrade());
+            System.out.printf("\t(%d) %-15s | %-15s | %-15d \n", i + 1, assignment.getNAME(), assignment.getIsSubmitted(), assignment.getGrade());
         }
     }
     public void displayStudents(List<Student> studentList) {
