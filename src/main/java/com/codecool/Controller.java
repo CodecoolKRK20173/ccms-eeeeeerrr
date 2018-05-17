@@ -69,8 +69,58 @@ public class Controller {
     }
 
     private void handleMenu(Privilege privilege) {
+        switch (privilege) {
+            case ADD_MENTOR:
+                addMentor();
+                break;
+            case REMOVE_MENTOR:
+                removeMentor();
+                break;
+            case EDIT_MENTOR:
+                editMentor();
+                break;
+            case GET_ALL_MENTORS:
+                displayMentors();
+                break;
+            case GET_ALL_STUDENTS:
+                displayStudents();
+                break;
+            case ADD_ASSIGNMENT:
+                addAssignment();
+                break;
+            case GRADE_ASSIGNMENT:
+                gradeAssignment();
+                break;
+            case CHECK_ATTENDANCE:
+                checkAttendance();
+                break;
+            case ADD_STUDENT:
+                addStudent();
+                break;
+            case REMOVE_STUDENT:
+                removeStudent();
+                break;
+            case EDIT_STUDENT:
+                editStudent();
+                break;
+            case SUBMIT_ASSIGNMENT:
+                submitAssignment();
+                break;
+            case GET_GRADES:
+                displayGrades();
+                break;
+            case EXIT:
+                exit();
+                break;
+            default:
+                errorMessage();
 
+        }
 
+    }
+
+    private void exit() {
+        
     }
 
 
