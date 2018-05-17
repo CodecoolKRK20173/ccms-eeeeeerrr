@@ -6,6 +6,7 @@ import com.codecool.details.Access;
 import com.codecool.details.Privilege;
 import com.codecool.person.CodecoolPerson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -15,18 +16,30 @@ public class Controller {
     private List<String> assignmentList;
     private View view = new View();
 
+    public Controller() {
+        this.csvDAOStudent = new CodecoolDAOStudent();
+        this.csvDAOEmployee = new CodecoolDAOEmployee();
+        this.assignmentList = new ArrayList<>();
+    }
+
     public void signIn() {
-        String login = view.askUserLogin();
-        String password = view.askUserPassword();
+        String login = askLogin();
+        String password = askPassword();
 
         user = searchStudent(login, password);
         if (user == null) {
             user = searchEmployee(login, password);
         }
     }
+    private String askLogin() {
+        return view.askUser("Provide login");
+    }
+
+    private String askPassword() {
+        return view.askUserPassword();
+    }
 
     private CodecoolPerson searchStudent(String login, String password) {
-        csvDAOStudent = new CodecoolDAOStudent();
 
         for (CodecoolPerson student : csvDAOStudent.getAllStudents()) {
             if (student.getLogin().equals(login) && student.getPassword().equals(password)) {
@@ -37,7 +50,6 @@ public class Controller {
     }
 
     private CodecoolPerson searchEmployee(String login, String password) {
-        csvDAOEmployee = new CodecoolDAOEmployee();
 
         for (CodecoolPerson employee : csvDAOEmployee.getAllEmployee()) {
             if (employee.getLogin().equals(login) && employee.getPassword().equals(password)) {
@@ -69,8 +81,58 @@ public class Controller {
     }
 
     private void handleMenu(Privilege privilege) {
+        switch (privilege) {
+            case ADD_MENTOR:
+                addMentor();
+                break;
+            case REMOVE_MENTOR:
+                removeMentor();
+                break;
+            case EDIT_MENTOR:
+                editMentor();
+                break;
+            case GET_ALL_MENTORS:
+                displayMentors();
+                break;
+            case GET_ALL_STUDENTS:
+                displayStudents();
+                break;
+            case ADD_ASSIGNMENT:
+                addAssignment();
+                break;
+            case GRADE_ASSIGNMENT:
+                gradeAssignment();
+                break;
+            case CHECK_ATTENDANCE:
+                checkAttendance();
+                break;
+            case ADD_STUDENT:
+                addStudent();
+                break;
+            case REMOVE_STUDENT:
+                removeStudent();
+                break;
+            case EDIT_STUDENT:
+                editStudent();
+                break;
+            case SUBMIT_ASSIGNMENT:
+                submitAssignment();
+                break;
+            case GET_GRADES:
+                displayGrades();
+                break;
+            case EXIT:
+                exit();
+                break;
+            default:
+                errorMessage();
 
+        }
 
+    }
+
+    private void exit() {
+        
     }
 
 
