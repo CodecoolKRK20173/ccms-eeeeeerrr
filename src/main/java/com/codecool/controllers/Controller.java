@@ -26,7 +26,7 @@ public class Controller implements Changeable {
         this.studentController = new StudentController();
         this.employeeController = new EmployeeController();
         //this.loginController = new LoginController();
-        loginController.signIn(user, csvDAOStudent, csvDAOEmployee);
+        loginController.signIn();
     }
 
     public LoginController getLoginController() {
@@ -43,6 +43,10 @@ public class Controller implements Changeable {
 
     public CodecoolPerson getUser() {
         return user;
+    }
+
+    public List<String> getAssignmentList() {
+        return assignmentList;
     }
 
     public void setUserToNull() {
@@ -97,28 +101,28 @@ public class Controller implements Changeable {
                 employeeController.displayMentors();
                 break;
             case GET_ALL_STUDENTS:
-                displayStudents();
+                studentController.displayStudents();
                 break;
             case ADD_ASSIGNMENT:
-                addAssignment();
+                studentController.addAssignment();
                 break;
             case GRADE_ASSIGNMENT:
-                gradeAssignment();
+                studentController.gradeAssignment();
                 break;
             case CHECK_ATTENDANCE:
-                checkAttendance();
+                studentController.checkAttendance();
                 break;
             case ADD_STUDENT:
-                addStudent();
+                studentController.addStudent();
                 break;
             case REMOVE_STUDENT:
-                removeStudent();
+                studentController.removeStudent();
                 break;
             case EDIT_STUDENT:
-                editStudent();
+                studentController.editStudent();
                 break;
             case SUBMIT_ASSIGNMENT:
-                submitAssignment();
+                studentController.submitAssignment();
                 break;
             case GET_GRADES:
                 displayGrades();

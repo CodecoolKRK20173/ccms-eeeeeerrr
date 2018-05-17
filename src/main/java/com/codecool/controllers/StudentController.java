@@ -9,12 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class StudentController {
-    private View view = new View();
-
+public class StudentController extends Controller {
 
     public void displayStudents() {
-        view.displayStudents(csvDAOStudent.getAllStudent());
+        view.displayStudents(super.getCsvDAOStudent().getAllStudent());
     }
 
     private Student createStudent() {
@@ -25,7 +23,7 @@ public class StudentController {
 
         name = view.askUser("Name: ");
         surName = view.askUser("Surname: ");
-        login = uniqueLogin();
+        login = super.getLoginController().uniqueLogin();
         password = view.askUser("Password: ");
 
         int attendance = 0;
@@ -34,17 +32,17 @@ public class StudentController {
         return new Student(name, surName, login, password, attendance, assignmentList);
     }
 
-    private void addStudent() {
-        csvDAOStudent.addStudent(createStudent());
+    public void addStudent() {
+        super.getCsvDAOStudent().addStudent(createStudent());
     }
 
-    private Student chooseStudent() {
-        List<Student> students = csvDAOStudent.getAllStudent();
+    public Student chooseStudent() {
+        List<Student> students = super.getCsvDAOStudent().getAllStudent();
         if (students.isEmpty()) {
             view.displayLine("No students.");
             return null;
         }
-        String login = askLogin();
+        String login = super.getLoginController().askLogin();
         for (Student student : students) {
             if(student.getLogin().equals(login)) {
                 return student;
@@ -53,12 +51,12 @@ public class StudentController {
         view.displayLine("There's no such student");
         return chooseStudent();
     }
-    private void removeStudent(){
+    public void removeStudent(){
         view.displayLine("You are going to remove student: ");
-        csvDAOStudent.removeStudent(chooseStudent());
+        super.getCsvDAOStudent().removeStudent(chooseStudent());
     }
 
-    private void editStudent() {
+    public void editStudent() {
         view.displayLine("You are going to edit student: ");
         CodecoolPerson student = chooseStudent();
         if (student == null) {
@@ -71,21 +69,19 @@ public class StudentController {
         changeLogin(student);
         changePassword(student);
     }
-    public void displayStudents() {
-        view.displayStudents(csvDAOStudent.getAllStudent());
-    }
-    private void addAssignment() {
+
+    public void addAssignment() {
         int countOfAssignments;
         Assignment assignment;
 
-        for (Student student : csvDAOStudent.getAllStudent()) {
+        for (Student student : super.getCsvDAOStudent().getAllStudent()) {
             countOfAssignments = student.getAssignmentList().size();
-            assignment = new Assignment(this.assignmentList.get(countOfAssignments));
+            assignment = new Assignment(super.getAssignmentList().get(countOfAssignments));
             student.addAssignment(assignment);
         }
     }
 
-    private void gradeAssignment() {
+    public void gradeAssignment() {
         Student student = chooseStudent();
         if (student == null) {
             return;
@@ -99,7 +95,7 @@ public class StudentController {
             assignment.setGrade(grade);
         }
     }
-    private int chooseGrade() {
+    public int chooseGrade() {
         List<Integer> possibleGrades = new ArrayList<>(Arrays.asList(-3, 0, 2, 4, 7, 10, 12));
         int grade = view.askNumber("Grade: ");
         if (!possibleGrades.contains(grade)) {
@@ -108,21 +104,21 @@ public class StudentController {
         return grade;
     }
 
-    private void checkAttendance() {
+    public void checkAttendance() {
         view.displayLine("Check attendance (y/n): ");
-        for (Student student : csvDAOStudent.getAllStudent()) {
+        for (Student student : super.getCsvDAOStudent().getAllStudent()) {
             checkAttendance(student);
         }
     }
 
-    private void checkAttendance(Student student) {
+    public void checkAttendance(Student student) {
         String present = view.askUser(String.format("\t%s %s | ", student.getName(), student.getSurName()));
         if (present.equals("y")) {
             student.addAttendance();
         }
     }
 
-    private void submitAssignment() {
+    public void submitAssignment() {
         Assignment assignment = chooseAssignment();
         if (assignment != null) {
             assignment.setSubmitted(true);
@@ -130,8 +126,8 @@ public class StudentController {
     }
 
     private Assignment chooseAssignment() {
-        return chooseAssignment((Student) this.user);
-    }
+        return chooseAssignment((Student) super.getUser());
+}
 
     private Assignment chooseAssignment(Student student) {
         List<Assignment> assignments = student.getAssignmentList();
@@ -150,6 +146,6 @@ public class StudentController {
     }
     private void displayGrades() {
         view.displayLine("Your grades: ");
-        view.displayAssignments(((Student) user).getAssignmentList());
+        view.displayAssignments(((Student) super.getUser()).getAssignmentList());
     }
 }
