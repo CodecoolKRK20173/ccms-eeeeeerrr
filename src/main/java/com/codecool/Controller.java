@@ -304,7 +304,7 @@ public class Controller {
 
         answer = view.askUser("Would you like to change login? (y/n)");
         if(answer.equals("y")) {
-            mentor.setLogin(view.askUser("Login: "));
+            mentor.setLogin(uniqueLogin());
         }
 
         answer = view.askUser("Would you like to change password? (y/n)");
