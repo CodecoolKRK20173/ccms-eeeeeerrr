@@ -163,8 +163,11 @@ public class Controller {
     private void gradeAssignment() {
         Student student = chooseStudent();
         Assignment assignment = chooseAssignment(student);
-        int grade = chooseGrade();
-        assignment.setGrade(grade);
+        if (assignment.getIsSubmitted()) {
+            System.out.println("test");
+            int grade = chooseGrade();
+            assignment.setGrade(grade);
+        }
     }
 
     private int chooseGrade() {
