@@ -208,10 +208,9 @@ public class Controller {
             if(mentor.getLogin().equals(login)) {
                 return mentor;
             }
-            view.displayLine("There's no such mentor");
-            chooseMentor();
         }
-        return null;
+        view.displayLine("There's no such mentor");
+        chooseMentor();
     }
 
 
@@ -285,10 +284,9 @@ public class Controller {
             if(student.getLogin().equals(login)) {
                 return student;
             }
-            view.displayLine("There's no such student");
-            chooseStudent();
         }
-        return null;
+        view.displayLine("There's no such student");
+        return chooseStudent();
     }
 
     private void removeStudent(){
