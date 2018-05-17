@@ -1,11 +1,10 @@
 package com.codecool.controllers;
 
 import com.codecool.View;
-import com.codecool.details.LogIn;
 import com.codecool.person.CodecoolPerson;
 
 public abstract class CodecoolPersonController {
-    private LogIn logIn;
+    private LoginController loginController;
     private View view = new View();
     public void changePassword(CodecoolPerson person) {
         String answer = view.askUser("Would you like to change password? (y/n)");
@@ -17,7 +16,7 @@ public abstract class CodecoolPersonController {
     public void changeLogin(CodecoolPerson person) {
         String answer = view.askUser("Would you like to change login? (y/n)");
         if(answer.equals("y")) {
-            person.setLogin(logIn.uniqueLogin());
+            person.setLogin(loginController.uniqueLogin());
         }
     }
 

@@ -1,4 +1,4 @@
-package com.codecool.details;
+package com.codecool.controllers;
 
 import com.codecool.DAO.CodecoolDAOEmployee;
 import com.codecool.DAO.CodecoolDAOStudent;
@@ -8,7 +8,7 @@ import com.codecool.person.CodecoolPerson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogIn {
+public class LoginController {
     private View view = new View();
 
     public void signIn(CodecoolPerson user, CodecoolDAOStudent csvDAOStudent, CodecoolDAOEmployee csvDAOEmployee) {
@@ -26,7 +26,7 @@ public class LogIn {
             signIn(user, csvDAOStudent, csvDAOEmployee);
         }
     }
-    private String askLogin() {
+    public String askLogin() {
         return view.askUser("Login");
     }
 

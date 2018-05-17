@@ -6,11 +6,7 @@ import com.codecool.View;
 import com.codecool.details.*;
 import com.codecool.person.CodecoolPerson;
 import com.codecool.person.Student;
-import com.codecool.person.Mentor;
-import com.codecool.person.Student;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Controller {
@@ -21,7 +17,7 @@ public class Controller {
     private View view = new View();
     private StudentController studentController;
     private EmployeeController employeeController;
-    private LogIn logIn;
+    private LoginController loginController;
 
     public Controller() {
         this.csvDAOStudent = new CodecoolDAOStudent();
@@ -29,8 +25,20 @@ public class Controller {
         this.assignmentList = new ReadAssignmentsFromFile().createlist();
         this.studentController = new StudentController();
         this.employeeController = new EmployeeController();
-        this.logIn = new LogIn();
-        logIn.signIn(user, csvDAOStudent, csvDAOEmployee);
+        this.loginController = new LoginController();
+        loginController.signIn(user, csvDAOStudent, csvDAOEmployee);
+    }
+
+    public LoginController getLoginController() {
+        return loginController;
+    }
+
+    public CodecoolDAOStudent getCsvDAOStudent() {
+        return csvDAOStudent;
+    }
+
+    public CodecoolDAOEmployee getCsvDAOEmployee() {
+        return csvDAOEmployee;
     }
 
     public void run() {
@@ -116,7 +124,7 @@ public class Controller {
 
     private void logOut() {
         exit();
-        logIn.signIn();
+        loginController.signIn();
     }
 
     private void displayGrades() {

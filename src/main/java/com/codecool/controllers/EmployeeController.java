@@ -5,8 +5,9 @@ import com.codecool.person.Mentor;
 
 import java.util.List;
 
-public class EmployeeController {
+public class EmployeeController extends Controller{
     private View view = new View();
+
     public Mentor createMentor() {
         String name;
         String surName;
@@ -15,25 +16,25 @@ public class EmployeeController {
 
         name = view.askUser("Name: ");
         surName = view.askUser("Surname: ");
-        login = uniqueLogin();
+        login = super.getLoginController().uniqueLogin(super.getCsvDAOEmployee(), super.getCsvDAOStudent());
         password = view.askUser("Password: ");
 
         return new Mentor(name, surName, login, password);
     }
 
     public void addMentor() {
-        csvDAOEmployee.addMentor(createMentor());
+        super.getCsvDAOEmployee().addMentor(createMentor());
     }
 
     public Mentor chooseMentor() {
-        List<Mentor> mentors = csvDAOEmployee.getAllMentors();
+        List<Mentor> mentors = super.getCsvDAOEmployee().getAllMentors();
         if (mentors.isEmpty()) {
             view.displayLine("No mentors.");
             return null;
         }
 
         String login;
-        login = askLogin();
+        login = super.getLoginController().askLogin();
         for (Mentor mentor : mentors) {
             if(mentor.getLogin().equals(login)) {
                 return mentor;
@@ -47,7 +48,7 @@ public class EmployeeController {
 
     public void removeMentor(){
         view.displayLine("You are going to remove mentor: ");
-        csvDAOEmployee.removeMentor(chooseMentor());
+        super.getCsvDAOEmployee().removeMentor(chooseMentor());
     }
 
     public void editMentor() {
