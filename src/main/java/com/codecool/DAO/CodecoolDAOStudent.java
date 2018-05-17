@@ -36,12 +36,6 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         }
     }
 
-    public void checkAttendence(Student student) {
-        int attend = student.getAttendance();
-        attend++;
-        student.setAttendance(attend);
-    }
-
     public void addStudent(Student student) {
         if (!this.studentList.contains(student)) {
             this.studentList.add(student);

@@ -133,6 +133,20 @@ public class Controller {
 
     }
 
+    private void checkAttendance() {
+        view.displayLine("Check attendance (y/n): ");
+        for (Student student : csvDAOStudent.getAllStudent()) {
+            checkAttendance(student);
+        }
+    }
+
+    private void checkAttendance(Student student) {
+        String present = view.askUser(String.format("\t%s %s | ", student.getName(), student.getSurName());
+        if (present.equals("y"))) {
+            student.addAttendance();
+        }
+    }
+
     private void submitAssignment() {
         view.displayAssignments(((Student) user).getAssignmentList());
         chooseAssignment().setSubmitted(true);

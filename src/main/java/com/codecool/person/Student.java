@@ -29,7 +29,7 @@ public class Student extends CodecoolPerson {
         this.assignmentList.add(assignment);
     }
 
-    public void setAttendance(int attend) {
-        this.attendance = attend;
+    public void addAttendance() {
+        this.attendance++;
     }
 }
