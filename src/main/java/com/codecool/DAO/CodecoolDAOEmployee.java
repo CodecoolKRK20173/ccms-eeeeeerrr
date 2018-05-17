@@ -61,8 +61,8 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
     }
 
 
-    public void saveToFile(String fileName) {
-        try (FileWriter fw = new FileWriter(fileName);
+    public void saveToFile() {
+        try (FileWriter fw = new FileWriter(this.file);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw)) {
             for(CodecoolPerson c : getAllEmployees()) {

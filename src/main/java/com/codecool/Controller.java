@@ -138,6 +138,8 @@ public class Controller {
                 displayGrades();
                 break;
             case EXIT:
+                csvDAOStudent.saveToFile();
+                csvDAOEmployee.saveToFile();
                 exit();
                 break;
             default:
