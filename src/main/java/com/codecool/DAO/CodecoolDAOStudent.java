@@ -11,7 +11,7 @@ import java.util.List;
 public class CodecoolDAOStudent implements DAOInterfaceStudent{
 
     private List<Student> studentList;
-    private String file = "student.csv";
+    private String file = "src/main/java/com/codecool/DAO/student.csv";
 
     public CodecoolDAOStudent() {
         this.studentList = new ArrayList<>();
@@ -37,9 +37,9 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     }
 
     public void checkAttendence(Student student) {
-        int attend = student.getAttendence();
+        int attend = student.getAttendance();
         attend++;
-        student.setAttendence(attend);
+        student.setAttendance(attend);
     }
 
     public void addStudent(Student student) {
@@ -56,7 +56,6 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
 
     }
 
-
     public List<Assignment> getAllGrades(Student student) {
         return student.getAssignmentList();
     }
@@ -68,14 +67,10 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     public void readFile() {
         final int NAME_INDEX = 0;
         final int SURNAME_INDEX = 1;
-        final int ISSUBMITTED_INDEX = 1;
         final int LOGIN_INDEX = 2;
-        final int GRADE_INDEX = 2;
         final int PASSWORD_INDEX = 3;
         final int ATTENDENCE_INDEX = 4;
         final int ASSIGNMENT_INDEX = 5;
-        final int ACCESS_LIST_INDEX = 6;
-
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.file));
@@ -86,16 +81,20 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
 
                 String[] oneLine = line.split(",");
                 String[] assignment = oneLine[ASSIGNMENT_INDEX].split(";");
+                for (int i = 0; i < assignment.length; i+=3) {
+                    String nameAssignment = assignment[i];
+                    boolean isSubmitted = Boolean.parseBoolean(assignment[i + 1]);
+                    if (assignment[i + 2].equalsIgnoreCase("null")) {
+                        assignmentList.add(new Assignment(nameAssignment, isSubmitted));
+                    } else {
+                        int grade = Integer.parseInt(assignment[i + 2]);
+                        assignmentList.add(new Assignment(nameAssignment, isSubmitted, grade));
+                    }
+                }
 
-                String nameAssignment = assignment[NAME_INDEX];
-                boolean isSubmitted = Boolean.parseBoolean(assignment[ISSUBMITTED_INDEX]);
-                int grade = Integer.parseInt(assignment[GRADE_INDEX]);
-
-                assignmentList.add(new Assignment(nameAssignment, isSubmitted, grade));
-
-                Integer attendence = Integer.valueOf(oneLine[ATTENDENCE_INDEX]);
+                Integer attendance = Integer.valueOf(oneLine[ATTENDENCE_INDEX]);
                 addStudent(new Student(oneLine[NAME_INDEX], oneLine[SURNAME_INDEX], oneLine[LOGIN_INDEX],
-                            oneLine[PASSWORD_INDEX], attendence, assignmentList, oneLine[ACCESS_LIST_INDEX]));
+                            oneLine[PASSWORD_INDEX], attendance, assignmentList));
 
                 line = reader.readLine();
             }
@@ -106,19 +105,24 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     }
 
     public void saveToFile() {
-        final int NAME_INDEX = 0;
-        final int IS_SUBMITTED_INDEX = 1;
-        final int GRADE_INDEX = 2;
 
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter(this.file));
-            for (Student student : studentList) {
-                writer.printf("%s,%s,%s,%s,%s;%s;%s,%s\n", student.getName(), student.getSurName(), student.getLogin(),
-                        student.getPassword(), student.getAssignmentList().get(NAME_INDEX),
-                        Integer.toString(student.getAssignment().get(IS_SUBMITTED_INDEX)),
-                        Boolean.toString(student.getAssignment().get(GRADE_INDEX)),
-                        student.getAccessLevel());
+            PrintWriter writer = new PrintWriter(new FileWriter(this.file, false));
+            for (Student student : this.studentList) {
+                writer.printf("%s,%s,%s,%s,%s,", student.getName(), student.getSurName(), student.getLogin(),
+                        student.getPassword(), student.getAttendance());
+                for (Assignment assignment : student.getAssignmentList()) {
+                        writer.printf("%s;%s;",assignment.getNAME(),
+                                Boolean.toString(assignment.getIsSubmitted()));
+                        if (assignment.getGrade() == null) {
+                            writer.printf("%s;", "null");
+                        } else {
+                            writer.printf("%s", Integer.toString(assignment.getGrade()));
+                        }
+
+                } writer.print("\n");
             }
+            writer.close();
         } catch (IOException e) {
             System.err.println(e);
         }
