@@ -12,7 +12,7 @@ public class Student extends CodecoolPerson {
     public Student(String name, String surName, String login, String password, int attendance,
                    List<Assignment> assignmentList) {
         super(name, surName, login, password);
-        this.accessLevel = Access.STUDENT;
+        super.setAccessLevel(Access.STUDENT);
         this.assignmentList = assignmentList;
         this.attendance = attendance;
     }

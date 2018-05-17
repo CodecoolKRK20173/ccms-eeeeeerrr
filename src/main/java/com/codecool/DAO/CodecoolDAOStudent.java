@@ -128,7 +128,4 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         }
     }
 
-    public CodecoolPerson[] getAllStudents() {
-        return new CodecoolPerson[0];
-    }
 }
