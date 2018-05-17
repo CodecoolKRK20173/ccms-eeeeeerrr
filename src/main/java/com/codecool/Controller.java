@@ -32,6 +32,7 @@ public class Controller {
     public void signIn() {
         String login = askLogin();
         String password = askPassword();
+        user = null;
 
         searchStudent(login, password);
         if (user == null) {
@@ -44,7 +45,7 @@ public class Controller {
         }
     }
     private String askLogin() {
-        return view.askUser("Provide login");
+        return view.askUser("Login");
     }
 
     private String askPassword() {
@@ -77,11 +78,11 @@ public class Controller {
     }
 
     private Privilege choosePrivilege() {
-        List<Privilege> priviledgeList = user.getAccess().getPrivileges();
+        List<Privilege> privileges = user.getAccess().getPrivileges();
         Integer answer = Integer.valueOf(view.askUser("Which option would you like to choose(number)"));
-        for(int i = 0; i < priviledgeList.size(); i++) {
+        for(int i = 0; i < privileges.size(); i++) {
             if(answer.equals(i)) {
-                return priviledgeList.get(i);
+                return privileges.get(i);
             }
         }
         view.displayLine("There's no such option!");
@@ -145,9 +146,7 @@ public class Controller {
                 break;
             default:
                 errorMessage();
-
         }
-
     }
 
     private void logOut() {
@@ -168,9 +167,14 @@ public class Controller {
 
     private void gradeAssignment() {
         Student student = chooseStudent();
+        if (student == null) {
+            return;
+        }
         Assignment assignment = chooseAssignment(student);
+        if (assignment == null) {
+            return;
+        }
         if (assignment.getIsSubmitted()) {
-            System.out.println("test");
             int grade = chooseGrade();
             assignment.setGrade(grade);
         }
@@ -200,7 +204,10 @@ public class Controller {
     }
 
     private void submitAssignment() {
-        chooseAssignment().setSubmitted(true);
+        Assignment assignment = chooseAssignment();
+        if (assignment != null) {
+            assignment.setSubmitted(true);
+        }
     }
 
     private Assignment chooseAssignment() {
@@ -210,6 +217,10 @@ public class Controller {
     private Assignment chooseAssignment(Student student) {
         List<Assignment> assignments = student.getAssignmentList();
         view.displayAssignments(assignments);
+        if (assignments.isEmpty()) {
+            view.displayLine("No assignments.");
+            return null;
+        }
 
        int assignmentNumber = view.askNumber("Choose assignment: ") - 1;
        if ((assignmentNumber < 0) || (assignmentNumber >= assignments.size())) {
@@ -249,7 +260,7 @@ public class Controller {
     }
 
     private String uniqueLogin() {
-        String login = view.askUser("Login: ");
+        String login = askLogin();
         List<CodecoolPerson> persons = new ArrayList<>();
         persons.addAll(csvDAOEmployee.getAllEmployees());
         persons.addAll(csvDAOStudent.getAllStudent());
@@ -268,9 +279,15 @@ public class Controller {
     }
 
     private Mentor chooseMentor() {
+        List<Mentor> mentors = csvDAOEmployee.getAllMentors();
+        if (mentors.isEmpty()) {
+            view.displayLine("No mentors.");
+            return null;
+        }
+
         String login;
-        login = view.askUser("Provide login:  ");
-        for (Mentor mentor : csvDAOEmployee.getAllMentors()) {
+        login = askLogin();
+        for (Mentor mentor : mentors) {
             if(mentor.getLogin().equals(login)) {
                 return mentor;
             }
@@ -287,29 +304,44 @@ public class Controller {
     }
 
     private void editMentor() {
-        String answer;
         view.displayLine("You are going to edit mentor: ");
         Mentor mentor = chooseMentor();
+        if (mentor == null) {
+            return;
+        }
         System.out.println(mentor);
 
-        answer = view.askUser("Would you like to change name? (y/n)");
-        if(answer.equals("y")) {
-            mentor.setName(view.askUser("Name: "));
-        }
+        changeName(mentor);
+        changeSurname(mentor);
+        changeLogin(mentor);
+        changePassword(mentor);
+    }
 
-        answer = view.askUser("Would you like to change surName? (y/n)");
+    private void changePassword(CodecoolPerson person) {
+        String answer = view.askUser("Would you like to change password? (y/n)");
         if(answer.equals("y")) {
-            mentor.setSurName(view.askUser("Surname: "));
+            person.setPassword(view.askUser("Password: "));
         }
+    }
 
-        answer = view.askUser("Would you like to change login? (y/n)");
+    private void changeLogin(CodecoolPerson person) {
+        String answer = view.askUser("Would you like to change login? (y/n)");
         if(answer.equals("y")) {
-            mentor.setLogin(uniqueLogin());
+            person.setLogin(uniqueLogin());
         }
+    }
 
-        answer = view.askUser("Would you like to change password? (y/n)");
+    private void changeSurname(CodecoolPerson person) {
+        String answer = view.askUser("Would you like to change surName? (y/n)");
         if(answer.equals("y")) {
-            mentor.setPassword(view.askUser("Password: "));
+            person.setSurName(view.askUser("Surname: "));
+        }
+    }
+
+    private void changeName(CodecoolPerson person) {
+        String answer = view.askUser("Would you like to change name? (y/n)");
+        if(answer.equals("y")) {
+            person.setName(view.askUser("Name: "));
         }
     }
 
@@ -343,9 +375,14 @@ public class Controller {
     }
 
     private Student chooseStudent() {
-        String login;
-        login = view.askUser("Provide login:  ");
-        for (Student student : csvDAOStudent.getAllStudent()) {
+        List<Student> students = csvDAOStudent.getAllStudent();
+        if (students.isEmpty()) {
+            view.displayLine("No students.");
+            return null;
+        }
+
+        String login = askLogin();
+        for (Student student : students) {
             if(student.getLogin().equals(login)) {
                 return student;
             }
@@ -360,30 +397,17 @@ public class Controller {
     }
 
     private void editStudent() {
-        String answer;
         view.displayLine("You are going to edit student: ");
-        Student student = chooseStudent();
+        CodecoolPerson student = chooseStudent();
+        if (student == null) {
+            return;
+        }
         System.out.println(student);
 
-        answer = view.askUser("Would you like to change name? (y/n)");
-        if(answer.equals("y")) {
-            student.setName(view.askUser("Name: "));
-        }
-
-        answer = view.askUser("Would you like to change surName? (y/n)");
-        if(answer.equals("y")) {
-            student.setSurName(view.askUser("Surname: "));
-        }
-
-        answer = view.askUser("Would you like to change login? (y/n)");
-        if(answer.equals("y")) {
-            student.setLogin(uniqueLogin());
-        }
-
-        answer = view.askUser("Would you like to change password? (y/n)");
-        if(answer.equals("y")) {
-            student.setPassword(view.askUser("Password: "));
-        }
+        changeName(student);
+        changePassword(student);
+        changeLogin(student);
+        changePassword(student);
     }
 
 
