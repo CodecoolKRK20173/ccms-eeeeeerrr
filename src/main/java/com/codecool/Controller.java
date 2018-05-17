@@ -5,6 +5,7 @@ import com.codecool.DAO.CodecoolDAOStudent;
 import com.codecool.details.Access;
 import com.codecool.details.Privilege;
 import com.codecool.person.CodecoolPerson;
+import com.codecool.person.Mentor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,24 @@ public class Controller {
     private void handleMenu(Privilege privilege) {
 
 
+    }
+
+    private Mentor createMentor() {
+        String name;
+        String surName;
+        String login;
+        String password;
+
+        name = view.askUser("Name: ");
+        surName = view.askUser("Surname: ");
+        login = view.askUser("Login: ");
+        password = view.askUser("Password: ");
+
+        return new Mentor(name, surName, login, password);
+    }
+
+    private void addMentor() {
+        csvDAOEmployee.addMentor(createMentor());
     }
 
 
