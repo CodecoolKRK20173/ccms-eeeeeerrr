@@ -6,6 +6,7 @@ import com.codecool.details.Access;
 import com.codecool.details.Privilege;
 import com.codecool.person.CodecoolPerson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -15,18 +16,30 @@ public class Controller {
     private List<String> assignmentList;
     private View view = new View();
 
+    public Controller() {
+        this.csvDAOStudent = new CodecoolDAOStudent();
+        this.csvDAOEmployee = new CodecoolDAOEmployee();
+        this.assignmentList = new ArrayList<>();
+    }
+
     public void signIn() {
-        String login = view.askUserLogin();
-        String password = view.askUserPassword();
+        String login = askLogin();
+        String password = askPassword();
 
         user = searchStudent(login, password);
         if (user == null) {
             user = searchEmployee(login, password);
         }
     }
+    private String askLogin() {
+        return view.askUser("Provide login");
+    }
+
+    private String askPassword() {
+        return view.askUserPassword();
+    }
 
     private CodecoolPerson searchStudent(String login, String password) {
-        csvDAOStudent = new CodecoolDAOStudent();
 
         for (CodecoolPerson student : csvDAOStudent.getAllStudents()) {
             if (student.getLogin().equals(login) && student.getPassword().equals(password)) {
@@ -37,7 +50,6 @@ public class Controller {
     }
 
     private CodecoolPerson searchEmployee(String login, String password) {
-        csvDAOEmployee = new CodecoolDAOEmployee();
 
         for (CodecoolPerson employee : csvDAOEmployee.getAllEmployee()) {
             if (employee.getLogin().equals(login) && employee.getPassword().equals(password)) {

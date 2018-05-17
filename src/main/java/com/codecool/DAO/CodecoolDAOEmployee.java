@@ -10,9 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CodecoolDAOEmployee implements DAOInterfaceEmp {
-    private List<Mentor> mentorList = new ArrayList<>();
-    private List<Manager> managerList = new ArrayList<>();
-    private List<RegularEmployee> regularEmployeeList = new ArrayList<>();
+    private String file = "employee.csv";
+    private List<Mentor> mentorList;
+    private List<Manager> managerList;
+    private List<RegularEmployee> regularEmployeeList;
+
+    public CodecoolDAOEmployee() {
+        this.mentorList = new ArrayList<>();
+        this.managerList = new ArrayList<>();
+        this.regularEmployeeList = new ArrayList<>();
+        readFile();
+    }
 
     public List<CodecoolPerson> getAllEmployees() {
         List<CodecoolPerson> employeeList = new ArrayList<>();
@@ -22,14 +30,13 @@ public class CodecoolDAOEmployee implements DAOInterfaceEmp {
         return employeeList;
     }
 
-    public void readFile(String fileName) {
+    public void readFile() {
         final int NAME_INDEX = 0;
         final int SURNAME_INDEX = 1;
         final int LOGIN_INDEX = 2;
         final int PASSWORD_INDEX = 3;
-        final int ACCESS_INDEX = 4;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line = br.readLine();
             while (line != null) {
                 String[] myEmloyee = line.split(",");
