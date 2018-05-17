@@ -242,10 +242,25 @@ public class Controller {
 
         name = view.askUser("Name: ");
         surName = view.askUser("Surname: ");
-        login = view.askUser("Login: ");
+        login = uniqueLogin();
         password = view.askUser("Password: ");
 
         return new Mentor(name, surName, login, password);
+    }
+
+    private String uniqueLogin() {
+        String login = view.askUser("Login: ");
+        List<CodecoolPerson> persons = new ArrayList<>();
+        persons.addAll(csvDAOEmployee.getAllEmployees());
+        persons.addAll(csvDAOStudent.getAllStudent());
+
+        for (CodecoolPerson person : persons) {
+            if (person.getLogin().equals(login)) {
+                view.displayLine("This account already exists.");
+                login = uniqueLogin();
+            }
+        }
+        return login;
     }
 
     private void addMentor() {
@@ -318,7 +333,7 @@ public class Controller {
 
         name = view.askUser("Name: ");
         surName = view.askUser("Surname: ");
-        login = view.askUser("Login: ");
+        login = uniqueLogin();
         password = view.askUser("Password: ");
 
         int attendance = 0;
@@ -366,7 +381,7 @@ public class Controller {
 
         answer = view.askUser("Would you like to change login? (y/n)");
         if(answer.equals("y")) {
-            student.setLogin(view.askUser("Login: "));
+            student.setLogin(uniqueLogin());
         }
 
         answer = view.askUser("Would you like to change password? (y/n)");
