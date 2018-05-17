@@ -13,6 +13,7 @@ public class View {
     Scanner scanner = new Scanner(System.in);
     Console cnsl;
     public void displayMenu(List<Privilege> privileges) {
+        clearScreen();
         displayLine("What would you like to do:");
         for (int i = 0; i < privileges.size(); i++) {
             System.out.printf("\t(%d) %s\n", i, privileges.get(i).toString());

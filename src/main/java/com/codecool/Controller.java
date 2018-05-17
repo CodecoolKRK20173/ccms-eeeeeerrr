@@ -37,6 +37,11 @@ public class Controller {
         if (user == null) {
             searchEmployee(login, password);
         }
+        if (user == null) {
+            view.clearScreen();
+            view.displayLine("Wrong login/password. Try again..");
+            signIn();
+        }
     }
     private String askLogin() {
         return view.askUser("Provide login");
@@ -88,7 +93,6 @@ public class Controller {
     }
 
     private void displayMenu() {
-        System.out.println(user);
         view.displayMenu(user.getAccess().getPrivileges());
     }
 
