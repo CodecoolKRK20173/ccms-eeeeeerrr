@@ -1,6 +1,7 @@
 package com.codecool;
 
 import com.codecool.details.Access;
+import com.codecool.details.Assignment;
 import com.codecool.details.Privilege;
 
 import java.io.Console;
@@ -52,5 +53,12 @@ public class View {
 
     public void clearScreen() {
         displayLine("\033[H\033[2J");
+    }
+
+    public void displayGrades(List<Assignment> assignments) {
+        System.out.println("Your grades:");
+        for (Assignment assignment : assignments) {
+            System.out.printf("\t %s: %d \n", assignment.getNAME(), assignment.getGrade());
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.codecool.DAO.CodecoolDAOStudent;
 import com.codecool.details.Access;
 import com.codecool.details.Privilege;
 import com.codecool.person.CodecoolPerson;
+import com.codecool.person.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,6 +130,10 @@ public class Controller {
 
         }
 
+    }
+
+    private void displayGrades() {
+        view.displayGrades(((Student) user).getAssignmentList());
     }
 
     private void errorMessage() {
