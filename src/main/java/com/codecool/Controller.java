@@ -200,13 +200,13 @@ public class Controller {
 
     private Assignment chooseAssignment(Student student) {
         List<Assignment> assignments = student.getAssignmentList();
+        view.displayAssignments(assignments);
 
-       int assignmentNumber = view.askNumber("Choose assignment: ");
-       if (assignmentNumber <= 0 || assignmentNumber > assignmentList.size()) {
+       int assignmentNumber = view.askNumber("Choose assignment: ") - 1;
+       if ((assignmentNumber < 0) || (assignmentNumber >= assignments.size())) {
            view.displayLine("There's no such Assignment");
-           chooseAssignment();
+           return chooseAssignment(student);
        }
-
         return assignments.get(assignmentNumber);
     }
 
