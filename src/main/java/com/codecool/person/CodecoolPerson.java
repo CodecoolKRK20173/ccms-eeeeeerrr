@@ -3,11 +3,11 @@ package com.codecool.person;
 import com.codecool.details.Access;
 
 public class CodecoolPerson {
-    String name;
-    String surName;
-    String login;
-    String password;
-    Access accessLevel;
+    private String name;
+    private String surName;
+    private String login;
+    private String password;
+    private Access accessLevel;
 
     public CodecoolPerson(String name, String surName, String login, String password) {
         this.name = name;
@@ -39,5 +39,30 @@ public class CodecoolPerson {
 
     public Access getAccess() {
         return null;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Name='" + name + '\'' +
+                ", SurName='" + surName + '\'' +
+                ", Login='" + login + '\'' +
+                ", Password='" + password + '\'' +
+                '}';
     }
 }

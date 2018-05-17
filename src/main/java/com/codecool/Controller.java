@@ -104,5 +104,49 @@ public class Controller {
         csvDAOEmployee.addMentor(createMentor());
     }
 
+    private Mentor getMentor() {
+        String login;
+        login = view.askUser("Provide login:  ");
+        for (Mentor mentor : csvDAOEmployee.getAllMentors()) {
+            if(mentor.getLogin().equals(login)) {
+                return mentor;
+            }
+            System.out.println("There's no such mentor");
+        }
+        return null;
+    }
 
+
+
+    private void removeMentor(){
+        view.displayLine("You are going to remove mentor: ");
+        csvDAOEmployee.removeMentor(getMentor());
+    }
+
+    private void editMentor() {
+        String answer;
+        view.displayLine("You are going to edit mentor: ");
+        Mentor mentor = getMentor();
+        System.out.println(mentor);
+
+        answer = view.askUser("Would you like to change name? (y/n)");
+        if(answer.equals("y")) {
+            mentor.setName(view.askUser("Name: "));
+        }
+
+        answer = view.askUser("Would you like to change surName? (y/n)");
+        if(answer.equals("y")) {
+            mentor.setSurName(view.askUser("Surname: "));
+        }
+
+        answer = view.askUser("Would you like to change login? (y/n)");
+        if(answer.equals("y")) {
+            mentor.setLogin(view.askUser("Login: "));
+        }
+
+        answer = view.askUser("Would you like to change password? (y/n)");
+        if(answer.equals("y")) {
+            mentor.setPassword(view.askUser("Password: "));
+        }
+    }
 }
