@@ -74,18 +74,19 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
                 List<Assignment> assignmentList = new ArrayList<>();
 
                 String[] oneLine = line.split(",");
-                String[] assignment = oneLine[ASSIGNMENT_INDEX].split(";");
-                for (int i = 0; i < assignment.length; i+=3) {
-                    String nameAssignment = assignment[i];
-                    boolean isSubmitted = Boolean.parseBoolean(assignment[i + 1]);
-                    if (assignment[i + 2].equalsIgnoreCase("null")) {
-                        assignmentList.add(new Assignment(nameAssignment, isSubmitted));
-                    } else {
-                        int grade = Integer.parseInt(assignment[i + 2]);
-                        assignmentList.add(new Assignment(nameAssignment, isSubmitted, grade));
+                if (oneLine.length > ASSIGNMENT_INDEX) {
+                    String[] assignment = oneLine[ASSIGNMENT_INDEX].split(";");
+                    for (int i = 0; i < assignment.length; i+=3) {
+                        String nameAssignment = assignment[i];
+                        boolean isSubmitted = Boolean.parseBoolean(assignment[i + 1]);
+                        if (assignment[i + 2].equalsIgnoreCase("null")) {
+                            assignmentList.add(new Assignment(nameAssignment, isSubmitted));
+                        } else {
+                            int grade = Integer.parseInt(assignment[i + 2]);
+                            assignmentList.add(new Assignment(nameAssignment, isSubmitted, grade));
+                        }
                     }
                 }
-
                 Integer attendance = Integer.valueOf(oneLine[ATTENDENCE_INDEX]);
                 addStudent(new Student(oneLine[NAME_INDEX], oneLine[SURNAME_INDEX], oneLine[LOGIN_INDEX],
                             oneLine[PASSWORD_INDEX], attendance, assignmentList));
@@ -111,7 +112,7 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
                         if (assignment.getGrade() == null) {
                             writer.printf("%s;", "null");
                         } else {
-                            writer.printf("%s", Integer.toString(assignment.getGrade()));
+                            writer.printf("%s;", Integer.toString(assignment.getGrade()));
                         }
 
                 } writer.print("\n");
