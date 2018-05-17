@@ -25,6 +25,15 @@ public class Student extends CodecoolPerson {
         return assignmentList;
     }
 
+    public String prepareAssignmentList() {
+        StringBuilder sb = new StringBuilder();
+        for(Assignment a : this.assignmentList) {
+            sb.append(a.getNAME());
+            sb.append(", ");
+        }
+        return sb.toString();
+    }
+
     public void addAssignment(Assignment assignment) {
         this.assignmentList.add(assignment);
     }

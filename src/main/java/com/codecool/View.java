@@ -77,21 +77,21 @@ public class View {
         }
     }
     public void displayStudents(List<Student> studentList) {
-        displayLine("/----------------------------------------------------\\");
-        displayLine(String.format("|%-25s| %-25s|", "NAME", "SURNAME"));
-        displayLine("|----------------------------------------------------|");
+        displayLine("/--------------------------------------------------------------------------------------------------------\\");
+        displayLine(String.format("|%-15s| %-15s|%-15s|%-55s|", "NAME", "SURNAME", "ATTENDANCE", "ASSIGNMENTS"));
+        displayLine("|--------------------------------------------------------------------------------------------------------|");
         for (Student s : studentList) {
-            this.displayLine(String.format("|%-25s| %-25s|", s.getName(), s.getSurName()));
+            this.displayLine(String.format("|%-15s| %-15s|%-15s|%-55s|", s.getName(), s.getSurName(), s.getAttendance(), s.prepareAssignmentList()));
         }
-        this.displayLine("\\----------------------------------------------------/");
+        this.displayLine("\\--------------------------------------------------------------------------------------------------------/");
     }
 
     public void displayMentors(List<Mentor> mentorList) {
         displayLine("/----------------------------------------------------\\");
-        displayLine(String.format("|%-25s| %-25s|", "NAME", "SURNAME"));
+        displayLine(String.format("|%-15s| %-15s|", "NAME", "SURNAME"));
         displayLine("|----------------------------------------------------|");
         for (Mentor m : mentorList) {
-            this.displayLine(String.format("|%-25s| %-25s|", m.getName(), m.getSurName()));
+            this.displayLine(String.format("|%-15s| %-15s|", m.getName(), m.getSurName()));
         }
         this.displayLine("\\----------------------------------------------------/");
     }
