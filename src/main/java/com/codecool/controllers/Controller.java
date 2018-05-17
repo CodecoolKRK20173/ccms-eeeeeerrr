@@ -9,15 +9,15 @@ import com.codecool.person.Student;
 
 import java.util.List;
 
-public class Controller {
+public class Controller implements Changeable {
     private CodecoolDAOStudent csvDAOStudent;
     private CodecoolDAOEmployee csvDAOEmployee;
     private CodecoolPerson user;
     private List<String> assignmentList;
-    private View view = new View();
+    //private View view = new View();
     private StudentController studentController;
     private EmployeeController employeeController;
-    private LoginController loginController;
+    //private LoginController loginController;
 
     public Controller() {
         this.csvDAOStudent = new CodecoolDAOStudent();
@@ -25,7 +25,7 @@ public class Controller {
         this.assignmentList = new ReadAssignmentsFromFile().createlist();
         this.studentController = new StudentController();
         this.employeeController = new EmployeeController();
-        this.loginController = new LoginController();
+        //this.loginController = new LoginController();
         loginController.signIn(user, csvDAOStudent, csvDAOEmployee);
     }
 
@@ -39,6 +39,18 @@ public class Controller {
 
     public CodecoolDAOEmployee getCsvDAOEmployee() {
         return csvDAOEmployee;
+    }
+
+    public CodecoolPerson getUser() {
+        return user;
+    }
+
+    public void setUserToNull() {
+        this.user = null;
+    }
+
+    public void setUser(CodecoolPerson user) {
+        this.user = user;
     }
 
     public void run() {

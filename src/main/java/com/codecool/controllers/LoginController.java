@@ -8,22 +8,22 @@ import com.codecool.person.CodecoolPerson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginController {
-    private View view = new View();
+public class LoginController extends Controller{
+    //private View view = new View();
 
-    public void signIn(CodecoolPerson user, CodecoolDAOStudent csvDAOStudent, CodecoolDAOEmployee csvDAOEmployee) {
+    public void signIn() {
         String login = askLogin();
         String password = askPassword();
-        user = null;
+        super.setUserToNull();
 
-        searchStudent(login, password, csvDAOStudent, user);
-        if (user == null) {
-            searchEmployee(login, password, csvDAOEmployee,  user);
+        searchStudent(login, password);
+        if (super.getUser() == null) {
+            searchEmployee(login, password);
         }
-        if (user == null) {
+        if (super.getUser() == null) {
             view.clearScreen();
             view.displayLine("Wrong login/password. Try again..");
-            signIn(user, csvDAOStudent, csvDAOEmployee);
+            signIn();
         }
     }
     public String askLogin() {
@@ -34,32 +34,32 @@ public class LoginController {
         return view.askUserPassword();
     }
 
-    private void searchStudent(String login, String password, CodecoolDAOStudent csvDAOStudent, CodecoolPerson user) {
-        for (CodecoolPerson student : csvDAOStudent.getAllStudent()) {
+    private void searchStudent(String login, String password) {
+        for (CodecoolPerson student : super.getCsvDAOStudent().getAllStudent()) {
             if (student.getLogin().equals(login) && student.getPassword().equals(password)) {
-                user = student;
+                super.setUser(student);
             }
         }
     }
 
-    private void searchEmployee(String login, String password, CodecoolDAOEmployee csvDAOEmployee, CodecoolPerson user) {
-        for (CodecoolPerson employee : csvDAOEmployee.getAllEmployees()) {
+    private void searchEmployee(String login, String password) {
+        for (CodecoolPerson employee : super.getCsvDAOEmployee().getAllEmployees()) {
             if (employee.getLogin().equals(login) && employee.getPassword().equals(password)) {
-                user = employee;
+                super.setUser(employee);
             }
         }
     }
 
-    public String uniqueLogin(CodecoolDAOEmployee csvDAOEmployee, CodecoolDAOStudent csvDAOStudent) {
+    public String uniqueLogin() {
         String login = askLogin();
         List<CodecoolPerson> persons = new ArrayList<>();
-        persons.addAll(csvDAOEmployee.getAllEmployees());
-        persons.addAll(csvDAOStudent.getAllStudent());
+        persons.addAll(super.getCsvDAOEmployee().getAllEmployees());
+        persons.addAll(super.getCsvDAOStudent().getAllStudent());
 
         for (CodecoolPerson person : persons) {
             if (person.getLogin().equals(login)) {
                 view.displayLine("This account already exists.");
-                login = uniqueLogin(csvDAOEmployee, csvDAOStudent);
+                login = uniqueLogin();
             }
         }
         return login;
