@@ -1,6 +1,7 @@
 package com.codecool.DAO;
 
 import com.codecool.details.Assignment;
+import com.codecool.person.CodecoolPerson;
 import com.codecool.person.Student;
 
 import java.io.*;
@@ -22,7 +23,7 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     }
 
     public void gradeAssignment(Student student, Assignment assignment, int grade) {
-        if (student.getAssignmentList.contains(assignment)) {
+        if (student.getAssignmentList().contains(assignment)) {
             assignment.setGrade(43);
         }
     }
@@ -30,7 +31,7 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
     public void submitAssignment(Student student, Assignment assignment) {
         for(Assignment assignment1 : student.getAssignmentList()) {
             if (assignment1.equals(assignment)) {
-                assignment.setIsSubmit(true);
+                assignment.setSubmitted(true);
             }
         }
     }
@@ -125,5 +126,9 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         } catch (IOException e) {
             System.err.println(e);
         }
+    }
+
+    public CodecoolPerson[] getAllStudents() {
+        return new CodecoolPerson[0];
     }
 }
