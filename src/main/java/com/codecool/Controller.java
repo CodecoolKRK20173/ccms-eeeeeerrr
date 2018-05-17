@@ -153,7 +153,11 @@ public class Controller {
     }
 
     private Assignment chooseAssignment() {
-        List<Assignment> assignments = ((Student) user).getAssignmentList();
+        return chooseAssignment((Student) this.user);
+    }
+
+    private Assignment chooseAssignment(Student student) {
+        List<Assignment> assignments = student.getAssignmentList();
 
        int assignmentNumber = view.askNumber("Choose assignment: ");
        if (assignmentNumber <= 0 || assignmentNumber > assignmentList.size()) {
