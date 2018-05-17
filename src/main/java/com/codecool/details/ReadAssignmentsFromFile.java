@@ -11,7 +11,7 @@ public class ReadAssignmentsFromFile {
 
     private String file = "src/main/java/com/codecool/resources/assignment.csv";
 
-    private List<String> createlist(){
+    public List<String> createlist(){
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.file));
             List<String> assignmentList = new ArrayList<>();
@@ -31,4 +31,6 @@ public class ReadAssignmentsFromFile {
         }
         return null;
     }
+
+
 }
