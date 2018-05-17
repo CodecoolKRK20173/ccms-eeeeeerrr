@@ -132,7 +132,7 @@ public class Controller {
     }
 
     private void exit() {
-        
+        view.displayLine("Goodbye :)");
     }
 
 
