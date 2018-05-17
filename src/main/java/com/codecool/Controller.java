@@ -73,9 +73,15 @@ public class Controller {
     }
 
     private Privilege choosePrivilege() {
-        String answer = view.askUser("Which option would you like to choose(number)");
-
-        return null;
+        List<Privilege> priviledgeList = user.getAccess().getPrivileges();
+        Integer answer = Integer.valueOf(view.askUser("Which option would you like to choose(number)"));
+        for(int i = 0; i < priviledgeList.size(); i++) {
+            if(answer.equals(i)) {
+                return priviledgeList.get(i);
+            }
+        }
+        view.displayLine("There's no such option!");
+        return choosePrivilege();
     }
 
     private boolean isRun(Privilege privilege) {
