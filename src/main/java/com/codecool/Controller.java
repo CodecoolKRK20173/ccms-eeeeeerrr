@@ -88,7 +88,6 @@ public class Controller {
     }
 
     private void displayMenu() {
-        System.out.println(user);
         view.displayMenu(user.getAccess().getPrivileges());
     }
 
@@ -134,6 +133,8 @@ public class Controller {
                 displayGrades();
                 break;
             case EXIT:
+                csvDAOStudent.saveToFile();
+                csvDAOEmployee.saveToFile();
                 exit();
                 break;
             default:
