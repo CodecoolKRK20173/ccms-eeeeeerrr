@@ -136,6 +136,17 @@ public class Controller {
 
     }
 
+    private void addAssignment() {
+        int countOfAssignments;
+        Assignment assignment;
+
+        for (Student student : csvDAOStudent.getAllStudent()) {
+            countOfAssignments = student.getAssignmentList().size();
+            assignment = new Assignment(this.assignmentList.get(countOfAssignments))
+            student.addAssignment(assignment);
+        }
+    }
+
     private void gradeAssignment() {
         Student student = chooseStudent();
         Assignment assignment = chooseAssignment(student);
