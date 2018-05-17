@@ -26,11 +26,16 @@ public class View {
 
     public String askUser(String message) {
         displayLine(message);
-        return scanner.nextLine();
+        String input;
+        do {
+            input = scanner.nextLine();
+        } while (input.isEmpty());
+        return input;
     }
 
     public int askNumber(String message) {
         displayLine(message);
+
         return scanner.nextInt();
     }
 
@@ -63,9 +68,10 @@ public class View {
 
     public void displayAssignments(List<Assignment> assignments) {
         Assignment assignment;
+        System.out.println("NAME | IS_SUBMITTED | GRADE ");
         for (int i = 0; i < assignments.size(); i++) {
             assignment = assignments.get(i);
-            System.out.printf("\t(%d) %s: %d \n", i + 1, assignment.getNAME(), assignment.getGrade());
+            System.out.printf("\t(%d) %s | %s | %d \n", i + 1, assignment.getNAME(), assignment.getIsSubmitted(), assignment.getGrade());
         }
     }
 }

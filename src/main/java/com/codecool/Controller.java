@@ -171,7 +171,7 @@ public class Controller {
         List<Integer> possibleGrades = new ArrayList<>(Arrays.asList(-3, 0, 2, 4, 7, 10, 12));
         int grade = view.askNumber("Grade: ");
         if (!possibleGrades.contains(grade)) {
-            chooseGrade();
+            return chooseGrade();
         }
         return grade;
     }
@@ -191,7 +191,6 @@ public class Controller {
     }
 
     private void submitAssignment() {
-        view.displayAssignments(((Student) user).getAssignmentList());
         chooseAssignment().setSubmitted(true);
     }
 
