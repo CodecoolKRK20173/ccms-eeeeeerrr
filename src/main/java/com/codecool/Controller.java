@@ -142,7 +142,7 @@ public class Controller {
 
         for (Student student : csvDAOStudent.getAllStudent()) {
             countOfAssignments = student.getAssignmentList().size();
-            assignment = new Assignment(this.assignmentList.get(countOfAssignments))
+            assignment = new Assignment(this.assignmentList.get(countOfAssignments));
             student.addAssignment(assignment);
         }
     }
@@ -171,8 +171,8 @@ public class Controller {
     }
 
     private void checkAttendance(Student student) {
-        String present = view.askUser(String.format("\t%s %s | ", student.getName(), student.getSurName());
-        if (present.equals("y"))) {
+        String present = view.askUser(String.format("\t%s %s | ", student.getName(), student.getSurName()));
+        if (present.equals("y")) {
             student.addAttendance();
         }
     }
