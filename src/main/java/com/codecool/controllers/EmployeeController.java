@@ -16,7 +16,7 @@ public class EmployeeController extends Controller{
 
         name = view.askUser("Name: ");
         surName = view.askUser("Surname: ");
-        login = super.getLoginController().uniqueLogin(super.getCsvDAOEmployee(), super.getCsvDAOStudent());
+        login = super.getLoginController().uniqueLogin();
         password = view.askUser("Password: ");
 
         return new Mentor(name, surName, login, password);
@@ -44,8 +44,6 @@ public class EmployeeController extends Controller{
         return chooseMentor();
     }
 
-
-
     public void removeMentor(){
         view.displayLine("You are going to remove mentor: ");
         super.getCsvDAOEmployee().removeMentor(chooseMentor());
@@ -66,8 +64,6 @@ public class EmployeeController extends Controller{
     }
 
     public void displayMentors() {
-        view.displayMentors(csvDAOEmployee.getAllMentors());
+        view.displayMentors(super.getCsvDAOEmployee().getAllMentors());
     }
-
-
 }
