@@ -3,6 +3,7 @@ package com.codecool;
 import com.codecool.DAO.CodecoolDAOEmployee;
 import com.codecool.DAO.CodecoolDAOStudent;
 import com.codecool.details.Access;
+import com.codecool.details.Assignment;
 import com.codecool.details.Privilege;
 import com.codecool.person.CodecoolPerson;
 import com.codecool.person.Mentor;
@@ -44,7 +45,7 @@ public class Controller {
 
     private CodecoolPerson searchStudent(String login, String password) {
 
-        for (CodecoolPerson student : csvDAOStudent.getAllStudents()) {
+        for (CodecoolPerson student : csvDAOStudent.getAllStudent()) {
             if (student.getLogin().equals(login) && student.getPassword().equals(password)) {
                 return student;
             }
@@ -66,12 +67,14 @@ public class Controller {
         Privilege privilege;
         do {
             displayMenu();
-            privilege = choosePrivilage();
+            privilege = choosePrivilege();
             handleMenu(privilege);
         } while (isRun(privilege));
     }
 
-    private Privilege choosePrivilage() {
+    private Privilege choosePrivilege() {
+        String answer = view.askUser("Which option would you like to choose(number)");
+
         return null;
     }
 
@@ -226,7 +229,10 @@ public class Controller {
         login = view.askUser("Login: ");
         password = view.askUser("Password: ");
 
-        return new Student(name, surName, login, password);
+        int attendance = 0;
+        List<Assignment> assignmentList = new ArrayList<>();
+
+        return new Student(name, surName, login, password, attendance, assignmentList);
     }
 
     private void addStudent() {
