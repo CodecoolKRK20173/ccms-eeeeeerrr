@@ -6,6 +6,7 @@ import com.codecool.details.Access;
 import com.codecool.details.Privilege;
 import com.codecool.person.CodecoolPerson;
 import com.codecool.person.Mentor;
+import com.codecool.person.Student;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -156,6 +157,78 @@ public class Controller {
         for (Mentor mentor : csvDAOEmployee.getAllMentors()) {
             System.out.println(mentor);
         }
-
     }
+
+    public void displayStudents() {
+        for (Student student : csvDAOStudent.getAllStudent()) {
+            System.out.println(student);
+        }
+    }
+
+    private Student createStudent() {
+        String name;
+        String surName;
+        String login;
+        String password;
+
+        name = view.askUser("Name: ");
+        surName = view.askUser("Surname: ");
+        login = view.askUser("Login: ");
+        password = view.askUser("Password: ");
+
+        return new Student(name, surName, login, password);
+    }
+
+    private void addStudent() {
+        csvDAOStudent.addStudent(createStudent());
+    }
+
+    private Student chooseStudent() {
+        String login;
+        login = view.askUser("Provide login:  ");
+        for (Student student : csvDAOStudent.getAllStudent()) {
+            if(student.getLogin().equals(login)) {
+                return student;
+            }
+            view.displayLine("There's no such student");
+            chooseStudent();
+        }
+        return null;
+    }
+
+    private void removeStudent(){
+        view.displayLine("You are going to remove student: ");
+        csvDAOStudent.removeStudent(chooseStudent());
+    }
+
+    private void editStudent() {
+        String answer;
+        view.displayLine("You are going to edit student: ");
+        Student student = chooseStudent();
+        System.out.println(student);
+
+        answer = view.askUser("Would you like to change name? (y/n)");
+        if(answer.equals("y")) {
+            student.setName(view.askUser("Name: "));
+        }
+
+        answer = view.askUser("Would you like to change surName? (y/n)");
+        if(answer.equals("y")) {
+            student.setSurName(view.askUser("Surname: "));
+        }
+
+        answer = view.askUser("Would you like to change login? (y/n)");
+        if(answer.equals("y")) {
+            student.setLogin(view.askUser("Login: "));
+        }
+
+        answer = view.askUser("Would you like to change password? (y/n)");
+        if(answer.equals("y")) {
+            student.setPassword(view.askUser("Password: "));
+        }
+    }
+
+
+
+
 }

@@ -57,6 +57,10 @@ public class CodecoolPerson {
         this.password = password;
     }
 
+    public void setAccessLevel(Access accessLevel) {
+        this.accessLevel = accessLevel;
+    }
+
     @Override
     public String toString() {
         return "Name='" + name + '\'' +
