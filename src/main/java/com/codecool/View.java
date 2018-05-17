@@ -28,6 +28,11 @@ public class View {
         return scanner.nextLine();
     }
 
+    public int askNumber(String message) {
+        displayLine(message);
+        return scanner.nextInt();
+    }
+
     public String askUserPassword() {
         cnsl = System.console();
         String password;
@@ -55,10 +60,11 @@ public class View {
         displayLine("\033[H\033[2J");
     }
 
-    public void displayGrades(List<Assignment> assignments) {
-        System.out.println("Your grades:");
-        for (Assignment assignment : assignments) {
-            System.out.printf("\t %s: %d \n", assignment.getNAME(), assignment.getGrade());
+    public void displayAssignments(List<Assignment> assignments) {
+        Assignment assignment;
+        for (int i = 0; i < assignments.size(); i++) {
+            assignment = assignments.get(i);
+            System.out.printf("\t(%d) %s: %d \n", i + 1, assignment.getNAME(), assignment.getGrade());
         }
     }
 }

@@ -37,11 +37,7 @@ public class Student extends CodecoolPerson {
         return 0;
     }
 
-    public void setAttendence(int attend) {
+    public void setAttendence(int attendence) {
 
-    }
-
-    public TemporalAccessor getAssignment() {
-        return null;
     }
 }

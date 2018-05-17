@@ -3,6 +3,7 @@ package com.codecool;
 import com.codecool.DAO.CodecoolDAOEmployee;
 import com.codecool.DAO.CodecoolDAOStudent;
 import com.codecool.details.Access;
+import com.codecool.details.Assignment;
 import com.codecool.details.Privilege;
 import com.codecool.person.CodecoolPerson;
 import com.codecool.person.Student;
@@ -132,8 +133,26 @@ public class Controller {
 
     }
 
+    private void submitAssignment() {
+        view.displayAssignments(((Student) user).getAssignmentList());
+        chooseAssignment().setSubmitted(true);
+    }
+
+    private Assignment chooseAssignment() {
+        List<Assignment> assignments = ((Student) user).getAssignmentList();
+
+       int assignmentNumber = view.askNumber("Choose assignment: ");
+       if (assignmentNumber <= 0 || assignmentNumber > assignmentList.size()) {
+           view.displayLine("There's no such Assignment");
+           chooseAssignment();
+       }
+
+        return assignments.get(assignmentNumber);
+    }
+
     private void displayGrades() {
-        view.displayGrades(((Student) user).getAssignmentList());
+        view.displayLine("Your grades: ");
+        view.displayAssignments(((Student) user).getAssignmentList());
     }
 
     private void errorMessage() {
