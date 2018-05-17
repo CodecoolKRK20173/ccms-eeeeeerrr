@@ -11,6 +11,7 @@ import com.codecool.person.Mentor;
 import com.codecool.person.Student;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Controller {
@@ -133,6 +134,22 @@ public class Controller {
 
         }
 
+    }
+
+    private void gradeAssignment() {
+        Student student = chooseStudent();
+        Assignment assignment = chooseAssignment(student);
+        int grade = chooseGrade();
+        assignment.setGrade(grade);
+    }
+
+    private int chooseGrade() {
+        List<Integer> possibleGrades = new ArrayList<>(Arrays.asList(-3, 0, 2, 4, 7, 10, 12));
+        int grade = view.askNumber("Grade: ");
+        if (!possibleGrades.contains(grade)) {
+            chooseGrade();
+        }
+        return grade;
     }
 
     private void checkAttendance() {
