@@ -46,10 +46,6 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         this.studentList.remove(student);
     }
 
-    public void editStudent(Student student) {
-
-    }
-
     public List<Assignment> getAllGrades(Student student) {
         return student.getAssignmentList();
     }
@@ -66,8 +62,7 @@ public class CodecoolDAOStudent implements DAOInterfaceStudent{
         final int ATTENDENCE_INDEX = 4;
         final int ASSIGNMENT_INDEX = 5;
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(this.file));
+        try (BufferedReader reader = new BufferedReader(new FileReader(this.file))){
             String line = reader.readLine();
 
             while(line != null){

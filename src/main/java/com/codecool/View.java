@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class View {
     Scanner scanner = new Scanner(System.in);
     Console cnsl;
+
     public void displayMenu(List<Privilege> privileges) {
         clearScreen();
         displayLine("What would you like to do:");
@@ -57,7 +58,6 @@ public class View {
             password = askUser("Provide password: ");
         }
         return password;
-
     }
 
     public void displayLine(String lineContent) {
@@ -70,29 +70,29 @@ public class View {
 
     public void displayAssignments(List<Assignment> assignments) {
         Assignment assignment;
-        System.out.println("NAME | IS_SUBMITTED | GRADE ");
+        displayLine(String.format("    |%-18s| %-15s|%-15s|", "NAME", "IS_SUBMITTED", "GRADE"));
         for (int i = 0; i < assignments.size(); i++) {
             assignment = assignments.get(i);
-            System.out.printf("\t(%d) %s | %s | %d \n", i + 1, assignment.getNAME(), assignment.getIsSubmitted(), assignment.getGrade());
+            System.out.printf("\t(%d) %-15s | %-15s | %-15d \n", i + 1, assignment.getNAME(), assignment.getIsSubmitted(), assignment.getGrade());
         }
     }
     public void displayStudents(List<Student> studentList) {
-        displayLine("/----------------------------------------------------\\");
-        displayLine(String.format("|%-25s| %-25s|", "NAME", "SURNAME"));
-        displayLine("|----------------------------------------------------|");
+        displayLine("/--------------------------------------------------------------------------------------------------------\\");
+        displayLine(String.format("|%-15s| %-15s|%-15s|%-55s|", "NAME", "SURNAME", "ATTENDANCE", "ASSIGNMENTS"));
+        displayLine("|--------------------------------------------------------------------------------------------------------|");
         for (Student s : studentList) {
-            this.displayLine(String.format("|%-25s| %-25s|", s.getName(), s.getSurName()));
+            this.displayLine(String.format("|%-15s| %-15s|%-15s|%-55s|", s.getName(), s.getSurName(), s.getAttendance(), s.prepareAssignmentList()));
         }
-        this.displayLine("\\----------------------------------------------------/");
+        this.displayLine("\\--------------------------------------------------------------------------------------------------------/");
     }
 
     public void displayMentors(List<Mentor> mentorList) {
-        displayLine("/----------------------------------------------------\\");
-        displayLine(String.format("|%-25s| %-25s|", "NAME", "SURNAME"));
-        displayLine("|----------------------------------------------------|");
+        displayLine("/---------------------------------\\");
+        displayLine(String.format("|%-15s| %-15s|", "NAME", "SURNAME"));
+        displayLine("|--------------------------------|");
         for (Mentor m : mentorList) {
-            this.displayLine(String.format("|%-25s| %-25s|", m.getName(), m.getSurName()));
+            this.displayLine(String.format("|%-15s| %-15s|", m.getName(), m.getSurName()));
         }
-        this.displayLine("\\----------------------------------------------------/");
+        this.displayLine("\\---------------------------------/");
     }
 }
