@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class View {
     Scanner scanner = new Scanner(System.in);
     Console cnsl;
+
     public void displayMenu(List<Privilege> privileges) {
         clearScreen();
         displayLine("What would you like to do:");
@@ -57,7 +58,6 @@ public class View {
             password = askUser("Provide password: ");
         }
         return password;
-
     }
 
     public void displayLine(String lineContent) {
