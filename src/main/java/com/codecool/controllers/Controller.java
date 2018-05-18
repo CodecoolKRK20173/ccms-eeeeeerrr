@@ -19,8 +19,6 @@ public class Controller {
 
 
     public Controller() {
-//        this.csvDAOStudent = new CodecoolDAOStudent();
-//        this.csvDAOEmployee = new CodecoolDAOEmployee();
         this.assignmentList = new ReadAssignmentsFromFile().createlist();
     }
 
@@ -76,8 +74,6 @@ public class Controller {
         view.displayMenu(user.getAccess().getPrivileges());
     }
 
-
-
     public void displayGrades() {
         view.displayLine("Your grades: ");
         view.displayAssignments(((Student) user).getAssignmentList());
@@ -131,6 +127,7 @@ public class Controller {
         }
     }
     public String askLogin() {
+        view.clearScreen();
         return view.askUser("Login");
     }
 

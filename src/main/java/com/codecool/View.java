@@ -87,12 +87,12 @@ public class View {
     }
 
     public void displayMentors(List<Mentor> mentorList) {
-        displayLine("/----------------------------------------------------\\");
+        displayLine("/---------------------------------\\");
         displayLine(String.format("|%-15s| %-15s|", "NAME", "SURNAME"));
-        displayLine("|----------------------------------------------------|");
+        displayLine("|--------------------------------|");
         for (Mentor m : mentorList) {
             this.displayLine(String.format("|%-15s| %-15s|", m.getName(), m.getSurName()));
         }
-        this.displayLine("\\----------------------------------------------------/");
+        this.displayLine("\\---------------------------------/");
     }
 }
